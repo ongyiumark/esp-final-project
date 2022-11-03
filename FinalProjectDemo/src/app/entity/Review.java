@@ -23,7 +23,7 @@ public class Review {
 	
 	@Column
 	@NotNull
-	private Long itemId;
+	private Long stallId;
 	
 	@Column
 	@NotNull
@@ -50,12 +50,12 @@ public class Review {
 		this.userId = userId;
 	}
 
-	public Long getItemId() {
-		return itemId;
+	public Long getStallId() {
+		return stallId;
 	}
 
-	public void setItemId(Long itemId) {
-		this.itemId = itemId;
+	public void setStallId(Long itemId) {
+		this.stallId = itemId;
 	}
 
 	public Integer getRating() {
@@ -76,7 +76,7 @@ public class Review {
 
 	@Override
 	public String toString() {
-		return "Review [reviewId=" + reviewId + ", userId=" + userId + ", itemId=" + itemId + ", rating=" + rating
+		return "Review [reviewId=" + reviewId + ", userId=" + userId + ", stallId=" + stallId + ", rating=" + rating
 				+ ", reviewBody=" + reviewBody + "]";
 	}
 	

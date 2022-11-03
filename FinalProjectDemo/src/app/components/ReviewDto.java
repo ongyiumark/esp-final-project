@@ -3,7 +3,7 @@ package app.components;
 public class ReviewDto {
 	private Long reviewId;
 	private Long userId;
-	private Long itemId;
+	private Long stallId;
 	private Integer rating;
 	private String reviewBody;
 
@@ -23,12 +23,12 @@ public class ReviewDto {
 		this.userId = userId;
 	}
 
-	public Long getItemId() {
-		return itemId;
+	public Long getStallId() {
+		return stallId;
 	}
 
-	public void setItemId(Long itemId) {
-		this.itemId = itemId;
+	public void setStallId(Long stallId) {
+		this.stallId = stallId;
 	}
 
 	public Integer getRating() {
@@ -49,7 +49,7 @@ public class ReviewDto {
 
 	@Override
 	public String toString() {
-		return "Review [reviewId=" + reviewId + ", userId=" + userId + ", itemId=" + itemId + ", rating=" + rating
+		return "Review [reviewId=" + reviewId + ", userId=" + userId + ", stallId=" + stallId + ", rating=" + rating
 				+ ", reviewBody=" + reviewBody + "]";
 	}
 }

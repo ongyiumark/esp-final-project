@@ -14,11 +14,10 @@ public class ReviewComponent {
 	ReviewRepository reviewRepo;
 	
 	@PostConstruct
-	public void init()
-	{
+	public void init() {
 	}
 	
-	public String newReview(String userName, String stallName, String reviewBody, int rating) {
+	public String newReview(String userName, String stallName, String reviewBody, Integer rating) {
 		return "This newReview URL received the following information: "
 				+ "\nuserName = " + userName 
 				+ "\nstallName = " + stallName

@@ -23,7 +23,7 @@ public class ReviewController {
 	public String newReview(@FormParam("userName") String userName,
 							@FormParam("stallName") String stallName,
 							@FormParam("reviewBody") String reviewBody,
-							@FormParam("rating") int rating) {
+							@FormParam("rating") Integer rating) {
 		return rc.newReview(userName, stallName, reviewBody, rating);
 	}
 	

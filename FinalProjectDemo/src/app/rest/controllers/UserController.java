@@ -9,6 +9,6 @@ public class UserController {
 	@GET
 	@Path("/login")
 	public String login() {
-		return "test";
+		return "test 2";
 	}
 }

@@ -1,4 +1,4 @@
-package app.components;
+package app.dto;
 
 public class LocationDto {
 	private Long locationId;

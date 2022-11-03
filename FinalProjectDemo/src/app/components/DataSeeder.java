@@ -5,6 +5,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import app.dto.FoodDto;
 import app.entity.FoodItem;
 import app.entity.FoodStall;
 import app.entity.Location;

@@ -1,4 +1,4 @@
-package app.components;
+package app.dto;
 
 public class ReviewDto {
 	private Long reviewId;

@@ -1,4 +1,4 @@
-package app.components;
+package app.dto;
 
 public class FoodDto {
 	private String itemName;

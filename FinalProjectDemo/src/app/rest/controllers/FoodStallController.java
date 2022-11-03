@@ -18,21 +18,21 @@ public class FoodStallController {
 	private FoodStallComponent fsc; 
 	
 	@GET
-	@Path("/stallList")   
-	public String stallList() {
-		return fsc.stallList();
+	@Path("/list")
+	public String getStalls() {
+		return fsc.getAllStalls();
 	}
 	
 	@POST
 	@Path("/new")    
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String newstall(
-			@FormParam("stallName") String stallname,
+	public String newStall(
+			@FormParam("stallName") String stallName,
 			@FormParam("description") String description,
 			@FormParam("locationName") String locationName,
 			@FormParam("longitude") Double longitude,
 			@FormParam("latitude") Double latitude) {
-		return fsc.addNewFoodStall(stallname,description,locationName,longitude,latitude);
+		return fsc.addNewFoodStall(stallName, description, locationName, longitude, latitude);
 	}
 }

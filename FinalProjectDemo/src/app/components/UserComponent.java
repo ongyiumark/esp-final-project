@@ -19,7 +19,7 @@ public class UserComponent {
 	}
 	
 	public String register(String userName, String password) {
-		return "This register URL received the following information: "
+		return "This 'user/register' URL received the following information: "
 				+ "\nuserName = " + userName 
 				+ "\npassword = " + password;
 	}

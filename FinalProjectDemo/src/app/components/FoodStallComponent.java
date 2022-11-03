@@ -21,8 +21,8 @@ public class FoodStallComponent {
 	public void init() {
 	}
 	
-	public String stallList() {
-		return "This stallList URL will return a list of all foodstalls";
+	public String getAllStalls() {
+		return "This 'stall/list' URL will return a list of all food stalls.";
 	}
 	
 	
@@ -33,7 +33,7 @@ public class FoodStallComponent {
 			Double longitude, 
 			Double latitude) {
 
-		return "This addNewFoodStall URL will receive the following information:"  
+		return "This 'stall/new' URL will receive the following information: "  
 			+ "\nstallName = " + stallName
 			+ "\ndescription = " + description
 			+ "\nlocationName = " + locationName

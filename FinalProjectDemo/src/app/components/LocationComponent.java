@@ -17,15 +17,15 @@ public class LocationComponent {
 	public void init() {
 	}
 	
-	public String newLocation(String locationName, Double longitude, Double latitude) {
-		return "This newLocation URL received the following information: "
+	public String addNewLocation(String locationName, Double longitude, Double latitude) {
+		return "This 'location/new' URL received the following information: "
 				+ "\nlocationName = " + locationName 
 				+ "\nlongitude = " + String.valueOf(longitude)
 				+ "\nlatitude = " + String.valueOf(latitude);
 	}
 	
-	public String locationList() {
-		return "This locationList URL will return a list of all locations";
+	public String getAllLocations() {
+		return "This 'location/list' URL will return a list of all locations";
 	}
 	
 }

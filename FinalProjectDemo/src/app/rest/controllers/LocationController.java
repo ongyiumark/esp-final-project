@@ -17,17 +17,17 @@ public class LocationController {
 	LocationComponent lc;
 	
 	@POST
-	@Path("/newLocation")
+	@Path("/new")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
 	public String newReview(@FormParam("locationName") String locationName,
 							@FormParam("longitude") Double longitude,
 							@FormParam("latitude") Double latitude) {
-		return lc.newLocation(locationName, longitude, latitude);
+		return lc.addNewLocation(locationName, longitude, latitude);
 	}
 	
 	@GET
-	@Path("/locationList")
+	@Path("/list")
 	public String reviewList() {
-		return lc.locationList();
+		return lc.getAllLocations();
 	}
 }

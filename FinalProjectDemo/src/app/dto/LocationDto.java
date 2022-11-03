@@ -1,17 +1,11 @@
 package app.dto;
 
 public class LocationDto {
-	private Long locationId;
 	private String locationName;
 	private Double latitude;
 	private Double longitude;
+	private String errorMessage;
 	
-	public Long getLocationId() {
-		return locationId;
-	}
-	public void setLocationId(Long locationId) {
-		this.locationId = locationId;
-	}
 	public String getLocationName() {
 		return locationName;
 	}
@@ -30,11 +24,20 @@ public class LocationDto {
 	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+	public void setErrorMessage(String errorMessage) {
+		this.errorMessage = errorMessage;
+	}
+	
 	@Override
 	public String toString() {
-		return "LocationDto [locationId=" + locationId + ", locationName=" + locationName + ", latitude=" + latitude
-				+ ", longitude=" + longitude + "]";
+		return "LocationDto [locationName=" + locationName + ", latitude=" + latitude + ", longitude=" + longitude
+				+ ", errorMessage=" + errorMessage + "]";
 	}
+	
+	
 
 	
 }

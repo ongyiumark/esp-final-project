@@ -7,5 +7,5 @@ import app.entity.Review;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long>{
-
+	Review findByStallId(Long stallId);
 }

@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import app.components.FoodItemComponent;
 
-@Path("food")
+@Path("/food")
 public class FoodItemController {
 
 	@Autowired
@@ -21,15 +21,13 @@ public class FoodItemController {
 	
 	@GET
 	@Path("/foodList")
-	public String foodListStatus() throws Exception
-	{
+	public String foodListStatus() {
 		return fic.foodList();
 	}
 	
 	@GET
 	@Path("/foodList/stall")
-	public String stallFoodList(@QueryParam("Stall Name")String stallName) {
-		
+	public String stallFoodList(@QueryParam("stallName") String stallName) {	
 		return fic.stallFoodList(stallName);
 	}
 	
@@ -37,9 +35,9 @@ public class FoodItemController {
 	@Path("/newFoodItem")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String newFoodItem(@FormParam("Stall Name")String stallName, 
-							  @FormParam("Item Name")String itemName, 
-							  @FormParam("Price")int price) {
+	public String newFoodItem(@FormParam("stallName") String stallName, 
+							  @FormParam("itemName") String itemName, 
+							  @FormParam("price") Double price) {
 		
 		return fic.addNewFoodItem(stallName, itemName, price);
 	}

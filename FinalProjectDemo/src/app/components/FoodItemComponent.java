@@ -12,24 +12,24 @@ import app.repository.FoodItemRepository;
 public class FoodItemComponent {
 
 	@Autowired
-	private FoodItemRepository foodRepo;
+	private FoodItemRepository itemRepo;
 	
 	@PostConstruct
 	public void init() {
 		
 	}
 	
-	public String foodList(){
-		return "This URL will return a list of all food items";
+	public String getAllFoods(){
+		return "This 'food/list' URL will return a list of all food items";
 	}
 	
-	public String stallFoodList(String stallName) {
-		return "This URL will return a list of food items from " 
+	public String getStallFoods(String stallName) {
+		return "This 'food/stall' URL will return a list of food items from " 
 					+ stallName;
 	}
 	
 	public String addNewFoodItem(String stallName, String itemName, Double price){
-		return "This URL will add a new food item with the following information: "
+		return "This 'food/new' URL will add a new food item with the following information: "
 				+ "\nstallName = " + stallName 
 				+ "\nitemName = " + itemName
 				+ "\nprice = " + String.valueOf(price);

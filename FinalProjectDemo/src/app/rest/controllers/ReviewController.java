@@ -18,24 +18,24 @@ public class ReviewController {
 	ReviewComponent rc;
 	
 	@POST
-	@Path("/newReview")
+	@Path("/new")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
-	public String newReview(@FormParam("userName") String userName,
+	public String addNewReview(@FormParam("userName") String userName,
 							@FormParam("stallName") String stallName,
 							@FormParam("reviewBody") String reviewBody,
 							@FormParam("rating") Integer rating) {
-		return rc.newReview(userName, stallName, reviewBody, rating);
+		return rc.addNewReview(userName, stallName, reviewBody, rating);
 	}
 	
 	@GET
-	@Path("/reviewList")
-	public String reviewList() {
-		return rc.reviewList();
+	@Path("/list")
+	public String getAllReviews() {
+		return rc.getAllReviews();
 	}
 	
 	@GET
-	@Path("/review")
-	public String reviewPerStall(@QueryParam("stallName") String stallName) {
-		return rc.reviewPerStall(stallName);
+	@Path("/stall")
+	public String getStallReviews(@QueryParam("stallName") String stallName) {
+		return rc.getStallReviews(stallName);
 	}
 }

@@ -1,19 +1,11 @@
-package app.components;
+package app.dto;
 
 public class ReviewDto {
-	private Long reviewId;
 	private Long userId;
 	private Long stallId;
 	private Integer rating;
 	private String reviewBody;
-
-	public Long getReviewId() {
-		return reviewId;
-	}
-
-	public void setReviewId(Long reviewId) {
-		this.reviewId = reviewId;
-	}
+	private String errorMessage;
 
 	public Long getUserId() {
 		return userId;
@@ -47,9 +39,19 @@ public class ReviewDto {
 		this.reviewBody = reviewBody;
 	}
 
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+
+	public void setErrorMessage(String errorMessage) {
+		this.errorMessage = errorMessage;
+	}
+
 	@Override
 	public String toString() {
-		return "Review [reviewId=" + reviewId + ", userId=" + userId + ", stallId=" + stallId + ", rating=" + rating
-				+ ", reviewBody=" + reviewBody + "]";
+		return "ReviewDto [userId=" + userId + ", stallId=" + stallId + ", rating=" + rating + ", reviewBody="
+				+ reviewBody + ", errorMessage=" + errorMessage + "]";
 	}
+
+	
 }

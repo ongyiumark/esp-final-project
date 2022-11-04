@@ -20,24 +20,25 @@ public class FoodItemController {
 	private FoodItemComponent fic;
 	
 	@GET
-	@Path("/foodList")
-	public String foodListStatus() {
-		return fic.foodList();
+	@Path("/list")
+	public String getAllFoods() {
+		return fic.getAllFoods();
 	}
 	
 	@GET
-	@Path("/foodList/stall")
-	public String stallFoodList(@QueryParam("stallName") String stallName) {	
-		return fic.stallFoodList(stallName);
+	@Path("/stall")
+	public String getStallFoods(@QueryParam("stallName") String stallName) {	
+		return fic.getStallFoods(stallName);
 	}
 	
 	@POST
-	@Path("/newFoodItem")
+	@Path("/new")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String newFoodItem(@FormParam("stallName") String stallName, 
-							  @FormParam("itemName") String itemName, 
-							  @FormParam("price") Double price) {
+	public String addNewFoodItem(
+			@FormParam("stallName") String stallName, 
+			@FormParam("itemName") String itemName, 
+			@FormParam("price") Double price) {
 		
 		return fic.addNewFoodItem(stallName, itemName, price);
 	}

@@ -1,6 +1,6 @@
-package app.components;
+package app.dto;
 
-public class FoodDto {
+public class FoodSeederDto {
 	private String itemName;
 	private Double price;
 	

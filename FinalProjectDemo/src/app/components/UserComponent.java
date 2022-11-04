@@ -19,18 +19,22 @@ public class UserComponent {
 	}
 	
 	public String register(String userName, String password) {
-		return "This register URL received the following information: "
+		return "This 'user/register' URL received the following information: "
 				+ "\nuserName = " + userName 
 				+ "\npassword = " + password;
 	}
 	
 	public String login(String userName, String password) {
-		return "This login URL received the following information: "
+		return "This 'user/login' URL received the following information: "
 				+ "\nuserName = " + userName 
 				+ "\npassword = " + password;
 	}
 	
 	public String logout() {
-		return "This URL logs out the current user";
+		return "This 'user/logout' URL logs out the current user";
+	}
+	
+	public String getAllUsers() {
+		return "This 'user/list' URL will return a list of all users without their passwords";
 	}
 }

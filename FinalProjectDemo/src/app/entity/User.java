@@ -23,6 +23,11 @@ public class User {
 	
 	@Column
 	@NotNull
+	@Size(max=16)
+	private String password;
+	
+	@Column
+	@NotNull
 	@Min(value=0L)
 	private Integer numReviews;
 
@@ -41,6 +46,15 @@ public class User {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+	
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public Integer getNumReviews() {
 		return numReviews;
@@ -52,8 +66,9 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", userName=" + userName + ", numReviews=" + numReviews + "]";
+		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", numReviews="
+				+ numReviews + "]";
 	}
-	
+
 	
 }

@@ -21,13 +21,13 @@ public class FoodItemController {
 	
 	@GET
 	@Path("/list")
-	public String foodList() {
+	public String getAllFoods() {
 		return fic.getAllFoods();
 	}
 	
 	@GET
 	@Path("/stall")
-	public String stallFoodList(@QueryParam("stallName") String stallName) {	
+	public String getStallFoods(@QueryParam("stallName") String stallName) {	
 		return fic.getStallFoods(stallName);
 	}
 	
@@ -35,9 +35,10 @@ public class FoodItemController {
 	@Path("/new")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String newFoodItem(@FormParam("stallName") String stallName, 
-							  @FormParam("itemName") String itemName, 
-							  @FormParam("price") Double price) {
+	public String addNewFoodItem(
+			@FormParam("stallName") String stallName, 
+			@FormParam("itemName") String itemName, 
+			@FormParam("price") Double price) {
 		
 		return fic.addNewFoodItem(stallName, itemName, price);
 	}

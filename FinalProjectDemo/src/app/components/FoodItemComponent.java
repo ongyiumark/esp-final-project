@@ -24,8 +24,8 @@ public class FoodItemComponent {
 	}
 	
 	public String getStallFoods(String stallName) {
-		return "This 'food/stall' URL will return a list of food items from " 
-					+ stallName;
+		return "This 'food/stall' URL received the following information: "
+				+ "\nstallName = " + stallName;
 	}
 	
 	public String addNewFoodItem(String stallName, String itemName, Double price){

@@ -19,7 +19,7 @@ public class LocationController {
 	@POST
 	@Path("/new")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
-	public String newReview(@FormParam("locationName") String locationName,
+	public String addNewLocation(@FormParam("locationName") String locationName,
 							@FormParam("longitude") Double longitude,
 							@FormParam("latitude") Double latitude) {
 		return lc.addNewLocation(locationName, longitude, latitude);
@@ -27,7 +27,7 @@ public class LocationController {
 	
 	@GET
 	@Path("/list")
-	public String reviewList() {
+	public String addNewLocation() {
 		return lc.getAllLocations();
 	}
 }

@@ -19,7 +19,7 @@ public class FoodStallController {
 	
 	@GET
 	@Path("/list")
-	public String getStalls() {
+	public String getAllStalls() {
 		return fsc.getAllStalls();
 	}
 	
@@ -27,7 +27,7 @@ public class FoodStallController {
 	@Path("/new")    
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String newStall(
+	public String addNewFoodStall(
 			@FormParam("stallName") String stallName,
 			@FormParam("description") String description,
 			@FormParam("locationName") String locationName,

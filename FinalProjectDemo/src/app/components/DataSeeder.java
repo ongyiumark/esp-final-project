@@ -5,10 +5,13 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import app.dto.FoodDto;
+import app.dto.FoodSeederDto;
+import app.dto.ReviewSeederDto;
 import app.entity.FoodItem;
 import app.entity.FoodStall;
 import app.entity.Location;
+import app.entity.Review;
+import app.entity.User;
 import app.repository.FoodItemRepository;
 import app.repository.FoodStallRepository;
 import app.repository.LocationRepository;
@@ -44,30 +47,56 @@ public class DataSeeder {
 	}
 	
 	private void initFoods() throws Exception {
-		FoodDto[] foods = {
-			makeFoods("Chicken Pop Jumbo", 160.0,  
+		FoodSeederDto[] foods = {
+			makeFood("Chicken Pop Jumbo", 160.0,  
 					"Chicks Rule", "Serving tasty & addicting chicken poppers since 2009.",
 					"Gonzaga Cafeteria", 121.07799954913702, 14.638947290686565),
-			makeFoods("Bacsilog", 100.0,  
+			makeFood("Bacsilog", 100.0,  
 					"Ate Rica’s BACSILOG", "Best known for serving tasty, quality, fast, and clean superior-silog meals.",
-					"Gonzaga Cafeteria", 121.07799954913702, 14.638947290686565)
+					"Gonzaga Cafeteria", 121.07799954913702, 14.638947290686565),
+			makeFood("Coffee Boomba", 40.0,  
+					"Juzijuiz", "Fresh iced drinks",
+					"Gonzaga Cafeteria", 121.07799954913702, 14.638947290686565),
+			makeFood("Melon Boomba", 40.0,  
+					"Juzijuiz", "Fresh iced drinks",
+					"Gonzaga Cafeteria", 121.07799954913702, 14.638947290686565),
+			makeFood("Red Iced Tea", 40.0,  
+					"Juzijuiz", "Fresh iced drinks",
+					"Gonzaga Cafeteria", 121.07799954913702, 14.638947290686565),
+			makeFood("White Chicks", 100.0,  
+					"Chunky Chicken", "Chicken Sanwiches and Pasta",
+					"Gonzaga Cafeteria", 121.07799954913702, 14.638947290686565),
+			makeFood("K-Chick", 110.0,  
+					"Chunky Chicken", "Chicken Sanwiches and Pasta",
+					"Gonzaga Cafeteria", 121.07799954913702, 14.638947290686565),
+			makeFood("Westside", 110.0,  
+					"Chunky Chicken", "Chicken Sanwiches and Pasta",
+					"Gonzaga Cafeteria", 121.07799954913702, 14.638947290686565),
 		};
 		
-		for (int i = 0; i < 2; i++) {
-			addFoods(foods[i]);
+		for (int i = 0; i < 8; i++) {
+			addFood(foods[i]);
 		}
 	}
 	
 	private void initReviews() {
-		// Initialize reviews
-		// automatically add users not in the database
+		ReviewSeederDto[] reviews = {
+				makeReview("ongyiumark", "Chunky Chicken", 5, "Affordable and delicious."),
+				makeReview("ongyiumark", "Juzijuiz", 4, "Refreshing."),
+				makeReview("user420", "Chunky Chicken", 4, "Large serving size")
+				
+		};
+		
+		for (int i = 0; i < 3; i++) {
+			addReview(reviews[i]);
+		}
 	}
 	
-	private FoodDto makeFoods(
+	private FoodSeederDto makeFood(
 			String itemName, Double price,
 			String stallName, String description,
 			String locationName, Double longitude, Double latitude) {
-		FoodDto foods = new FoodDto();
+		FoodSeederDto foods = new FoodSeederDto();
 		foods.setItemName(itemName);
 		foods.setPrice(price);
 		foods.setStallName(stallName);
@@ -79,8 +108,7 @@ public class DataSeeder {
 		return foods;
 	}
 	
-	private void addFoods(FoodDto dto) throws Exception {
-		
+	private void addFood(FoodSeederDto dto) throws Exception {
 		// Automatically add locations not in the database
 		Location loc = locationRepo.findByLocationName(dto.getLocationName());
 		if (loc == null) {
@@ -116,4 +144,45 @@ public class DataSeeder {
 		
 		item = itemRepo.save(item);
 	}
+	
+	private ReviewSeederDto makeReview(
+			String userName, String stallName,
+			Integer rating, String reviewBody) {
+		ReviewSeederDto review = new ReviewSeederDto();
+		review.setUserName(userName);
+		review.setStallName(stallName);
+		review.setRating(rating);
+		review.setReviewBody(reviewBody);
+		return review;
+	}
+	
+	private void addReview(ReviewSeederDto dto) {
+		FoodStall stall = stallRepo.findByStallName(dto.getStallName());
+		if (stall == null) {
+			throw new RuntimeException(
+					String.format("Cannot find the food stall: %s", dto.getStallName()));
+		}
+		
+		// Automatically user not in the database
+		User user = userRepo.findByUserName(dto.getUserName());
+		if (user == null) {
+			user = new User();
+			user.setUserName(dto.getUserName());
+			user.setPassword(dto.getUserName());
+			user.setNumReviews(0);
+			user = userRepo.save(user);
+		}
+		
+		
+		user.setNumReviews(user.getNumReviews()+1);
+		user = userRepo.save(user);
+		// Add new review
+		Review review = new Review();
+		review.setUserId(user.getUserId());
+		review.setStallId(stall.getStallId());
+		review.setRating(dto.getRating());
+		review.setReviewBody(dto.getReviewBody());
+		review = reviewRepo.save(review);
+	}
+	
 }

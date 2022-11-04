@@ -40,4 +40,10 @@ public class UserController {
 		return uc.logout();
 	}
 	
+	@GET
+	@Path("/list")
+	public String getAllUsers() {
+		return uc.getAllUsers();
+	}
+	
 }

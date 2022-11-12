@@ -50,6 +50,62 @@ function parseResponse(res) {
     else output.innerText = JSON.stringify(res, null, 2);
 }
 
+// Load URL presets
+function loadPresets() {
+    if (!presets.length) return;
+
+    let select = document.createElement("select");
+    select.setAttribute("name", "presets");
+    select.setAttribute("id", "preset-select")
+
+    let defaultOption = document.createElement("option");
+    defaultOption.setAttribute("value", "");
+    defaultOption.setAttribute("selected", "");
+    defaultOption.setAttribute("disabled", "");
+    defaultOption.setAttribute("hidden", "");
+    defaultOption.innerText = "Choose preset"
+    select.appendChild(defaultOption);
+
+    for (const preset of presets) {
+        let option = document.createElement("option");
+        option.setAttribute("value", preset['name']);
+        option.innerText = preset['name'];
+        select.appendChild(option);
+    } 
+
+    document.getElementById("preset-container").appendChild(select);
+
+    // Add change listener
+    select = document.getElementById("preset-select");
+    select.addEventListener("change", function() {
+        for (const preset of presets) {
+            if (select.value == preset["name"]) {
+                document.getElementById("url-input").value = preset["url"];
+
+                // Adjust data table length to fit number of parameters
+                let n = Object.keys(preset['data']).length;
+                while(num_data < n) {
+                    addDataRow();
+                }
+                let dataTable = document.getElementById("data-table");
+                while (dataTable.childNodes.length > 2+n) {
+                    dataTable.removeChild(dataTable.lastChild);
+                    num_data -= 1;
+                }
+
+                let i = 1;
+                for (let key in preset['data']) {
+                    let dataKey = document.getElementById(`data-key-${i}`);
+                    let dataVal = document.getElementById(`data-value-${i}`);
+                    dataKey.value = key;
+                    dataVal.value = preset['data'][key];
+                    i += 1;
+                }
+            }
+        } 
+    }); 
+}
+
 
 function init() {
     // Set url prefix based on helper.js
@@ -111,6 +167,9 @@ function init() {
                 parseResponse(error.message);
             })
     });
+
+    // Load presets
+    loadPresets();
 }
 
 

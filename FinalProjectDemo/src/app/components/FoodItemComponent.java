@@ -1,12 +1,17 @@
 package app.components;
 
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import app.entity.FoodItem;
+import app.entity.FoodStall;
 import app.repository.FoodItemRepository;
+import app.repository.FoodStallRepository;
 
 @Component
 public class FoodItemComponent {
@@ -14,18 +19,26 @@ public class FoodItemComponent {
 	@Autowired
 	private FoodItemRepository itemRepo;
 	
+	@Autowired
+	private FoodStallRepository stallRepo;
+	
 	@PostConstruct
 	public void init() {
 		
 	}
 	
-	public String getAllFoods(){
-		return "This 'food/list' URL will return a list of all food items";
+	public List<FoodItem> getAllFoods(){
+		return itemRepo.findAll();
 	}
 	
-	public String getStallFoods(String stallName) {
-		return "This 'food/stall' URL received the following information: "
-				+ "\nstallName = " + stallName;
+	public List<FoodItem> getStallFoods(String stallName) {
+		FoodStall stall = stallRepo.findByStallName(stallName);
+		if (stall == null) {
+			throw new RuntimeException(
+				String.format("%s is not in the database.", stallName)
+			);
+		}
+		return itemRepo.findByStallId(stall.getStallId());
 	}
 	
 	public String addNewFoodItem(String stallName, String itemName, Double price){

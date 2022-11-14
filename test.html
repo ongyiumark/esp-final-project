@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/test.css">
+        <script type="text/javascript" src="js/test_presets.js"></script>
+        <script type="text/javascript" src="js/helper.js"></script>
+        <script type="text/javascript" src="js/test.js" defer></script>
+    </head>
+
+    <div id="preset-container">
+        <p>Preset queries: </p>
+    </div>
+    
+    <div id="form-container">
+        <div id="url-input-container">
+            <p id="url-input-prefix"></p>
+            <input type="text" id="url-input"/>
+            <button class='btn' id="get-btn">GET</button>
+            <button class='btn' id="post-btn">POST</button>
+        </div>
+    </div>
+
+    <div id="data-output-container">
+        <div id="data-container">
+            <table id="data-table">
+                <tr>
+                    <th>Key</th>
+                    <th>Value</th>
+                </tr>
+            </table>
+            <button class="btn" id="add-data-btn">+</button>
+        </div>
+    
+        <div id="output-container">
+            <h4 id="output-url"></h4>
+            <h3 id="output-header">Output:</h3>
+            <p id="output-text"></p>
+        </div>
+    </div>
+
+</html>

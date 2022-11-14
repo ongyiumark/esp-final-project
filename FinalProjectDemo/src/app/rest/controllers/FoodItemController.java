@@ -1,5 +1,7 @@
 package app.rest.controllers;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -12,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import app.components.FoodItemComponent;
+import app.entity.FoodItem;
 
 @Path("/food")
 public class FoodItemController {
@@ -21,13 +24,15 @@ public class FoodItemController {
 	
 	@GET
 	@Path("/list")
-	public String getAllFoods() {
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<FoodItem> getAllFoods() {
 		return fic.getAllFoods();
 	}
 	
 	@GET
 	@Path("/stall")
-	public String getStallFoods(@QueryParam("stallName") String stallName) {	
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<FoodItem> getStallFoods(@QueryParam("stallName") String stallName) {	
 		return fic.getStallFoods(stallName);
 	}
 	

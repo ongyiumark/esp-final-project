@@ -39,8 +39,8 @@ public class FoodItemController {
 	@POST
 	@Path("/new")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	@Produces(MediaType.TEXT_PLAIN)
-	public String addNewFoodItem(
+	@Produces(MediaType.APPLICATION_JSON)
+	public FoodItem addNewFoodItem(
 			@FormParam("stallName") String stallName, 
 			@FormParam("itemName") String itemName, 
 			@FormParam("price") Double price) {

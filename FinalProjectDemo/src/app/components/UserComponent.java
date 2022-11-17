@@ -5,13 +5,16 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import app.entity.Session;
 import app.entity.User;
+import app.repository.SessionRepository;
 import app.repository.UserRepository;
 
 @Component
@@ -20,9 +23,13 @@ public class UserComponent {
 	@Autowired
 	UserRepository userRepo;
 	
+	@Autowired
+	SessionRepository sessionRepo;
+	
 	@PostConstruct
 	public void init() {
-		
+		// Delete all sessions at start up
+		sessionRepo.deleteAll();
 	}
 	
 	private String SHA256Hash(String input) throws NoSuchAlgorithmException {
@@ -73,7 +80,7 @@ public class UserComponent {
 		return user;
 	}
 	
-	public String login(String userName, String password) {
+	public Session login(String userName, String password) {
 		// Encrypt password
 		String encryptedPassword;
 		try {
@@ -88,13 +95,28 @@ public class UserComponent {
 			throw new RuntimeException("Invalid credentials");
 		}
 		
-		return "This 'user/login' URL received the following information: "
-				+ "\nuserName = " + userName 
-				+ "\npassword = " + password;
+		// Instantiate new session
+		Session session = new Session();
+		String sessionKey = UUID.randomUUID().toString();
+		session.setUserId(user.getUserId());
+		session.setSessionKey(sessionKey);
+		
+		// Save session
+		session = sessionRepo.save(session);
+		
+		return session;
 	}
 	
-	public String logout() {
-		return "This 'user/logout' URL logs out the current user";
+	public String logout(String sessionKey) {
+		// Find session with corresponding `sessionKey`
+		Session session = sessionRepo.findBySessionKey(sessionKey);
+		if (session == null) {
+			throw new RuntimeException("Invalid session key.");
+		}
+		
+		// Delete session from table
+		sessionRepo.deleteById(session.getSessionId());
+		return "Logged out successfully.";
 	}
 	
 	public List<User> getAllUsers() {

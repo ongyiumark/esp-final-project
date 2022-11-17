@@ -81,6 +81,10 @@ public class UserComponent {
 	}
 	
 	public Session login(String userName, String password) {
+		if (sessionRepo.count() > 0) {
+			throw new RuntimeException("A user is already logged in.");
+		}
+		
 		// Encrypt password
 		String encryptedPassword;
 		try {

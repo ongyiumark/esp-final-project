@@ -27,6 +27,9 @@ public class FoodStall {
 	@Column
 	@NotNull
 	private Long locationId;
+	
+	@Column
+	private Long imageId;
 
 	public Long getStallId() {
 		return stallId;
@@ -60,11 +63,18 @@ public class FoodStall {
 		this.locationId = locationId;
 	}
 
+	public Long getImageId() {
+		return imageId;
+	}
+
+	public void setImageId(Long imageId) {
+		this.imageId = imageId;
+	}
+
 	@Override
 	public String toString() {
 		return "FoodStall [stallId=" + stallId + ", stallName=" + stallName + ", description=" + description
-				+ ", locationId=" + locationId + "]";
+				+ ", locationId=" + locationId + ", imageId=" + imageId + "]";
 	}
-	
 	
 }

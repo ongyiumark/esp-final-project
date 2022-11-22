@@ -3,6 +3,7 @@ package app.rest.errorhandlers;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
@@ -29,11 +30,11 @@ public class ServiceException extends Exception implements
     public Response toResponse(Throwable exception) 
     {
     	// throw an error message as a big block of text
-    	StringWriter sw = new StringWriter();
-        exception.printStackTrace(new PrintWriter(sw));
-        String exceptionAsString = sw.toString();
+    	// StringWriter sw = new StringWriter();
+        // exception.printStackTrace(new PrintWriter(sw));
+        // String exceptionAsString = sw.toString();
         
-        return Response.status(500).entity(exceptionAsString)
-                                    .type("text/plain").build();
+        return Response.status(500).entity(exception)
+                                    .type(MediaType.APPLICATION_JSON).build();
     }
 }

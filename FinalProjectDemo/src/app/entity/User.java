@@ -18,12 +18,12 @@ public class User {
 	
 	@Column
 	@NotNull
-	@Size(max=10)
+	@Size(max=16)
 	private String userName;
 	
 	@Column
 	@NotNull
-	@Size(max=16)
+	@Size(max=64)
 	private String password;
 	
 	@Column

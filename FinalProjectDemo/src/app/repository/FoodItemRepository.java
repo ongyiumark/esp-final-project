@@ -10,4 +10,5 @@ import app.entity.FoodItem;
 @Repository
 public interface FoodItemRepository extends JpaRepository<FoodItem, Long> {
 	public List<FoodItem> findByStallId(Long stallId);
+	public FoodItem findByItemNameAndStallId(String itemName, Long stallId);
 }

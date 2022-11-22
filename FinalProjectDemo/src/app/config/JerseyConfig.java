@@ -1,5 +1,6 @@
 package app.config;
 
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,7 +13,8 @@ public class JerseyConfig extends ResourceConfig {
 		// need to explicitly tell Jersey where the REST classes are found
 		packages("app.rest");  
 				    
-
-
+		// OPTIONAL:
+        // MULTIPART SUPPORT
+        register(MultiPartFeature.class);
     }
 }

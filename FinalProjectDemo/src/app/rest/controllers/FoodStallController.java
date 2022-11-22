@@ -1,5 +1,7 @@
 package app.rest.controllers;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -11,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import app.components.FoodStallComponent;
+import app.entity.FoodStall;
 
 @Path("/stall")
 public class FoodStallController {
@@ -19,15 +22,16 @@ public class FoodStallController {
 	
 	@GET
 	@Path("/list")
-	public String getAllStalls() {
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<FoodStall> getAllStalls() {
 		return fsc.getAllStalls();
 	}
 	
 	@POST
 	@Path("/new")    
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	@Produces(MediaType.TEXT_PLAIN)
-	public String addNewFoodStall(
+	@Produces(MediaType.APPLICATION_JSON)
+	public FoodStall addNewFoodStall(
 			@FormParam("stallName") String stallName,
 			@FormParam("description") String description,
 			@FormParam("locationName") String locationName,

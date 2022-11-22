@@ -32,20 +32,41 @@ public class FoodItemComponent {
 	}
 	
 	public List<FoodItem> getStallFoods(String stallName) {
+		// Find the food stall corresponding to `stallName`
 		FoodStall stall = stallRepo.findByStallName(stallName);
 		if (stall == null) {
 			throw new RuntimeException(
-				String.format("%s is not in the database.", stallName)
+				String.format("Food stall '%s' is not in the database.", stallName)
 			);
 		}
+		
 		return itemRepo.findByStallId(stall.getStallId());
 	}
 	
-	public String addNewFoodItem(String stallName, String itemName, Double price){
-		return "This 'food/new' URL will add a new food item with the following information: "
-				+ "\nstallName = " + stallName 
-				+ "\nitemName = " + itemName
-				+ "\nprice = " + String.valueOf(price);
+	public FoodItem addNewFoodItem(String stallName, String itemName, Double price){
+		// Find the food stall corresponding to `stallName`
+		FoodStall stall = stallRepo.findByStallName(stallName);
+		if (stall == null) {
+			throw new RuntimeException(
+				String.format("Food stall '%s' is not in the database.", stallName)
+			);
+		}
+		
+		// Check if food item already exists in the same stall
+		FoodItem item = itemRepo.findByItemNameAndStallId(itemName, stall.getStallId());
+		
+		// Instantiate new food item if it is not in the database
+		if (item == null) item = new FoodItem();
+		
+		// Update properties
+		item.setItemName(itemName);
+		item.setStallId(stall.getStallId());
+		item.setPrice(price);
+		
+		// Update database
+		item = itemRepo.save(item);
+		
+		return item;
 	}
 	
 	

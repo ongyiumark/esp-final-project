@@ -1,5 +1,10 @@
 package app.components;
 
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -168,7 +173,15 @@ public class DataSeeder {
 		if (user == null) {
 			user = new User();
 			user.setUserName(dto.getUserName());
-			user.setPassword(dto.getUserName());
+			
+			String password;
+			try {
+				password = SHA256Hash(dto.getUserName());
+			} catch (NoSuchAlgorithmException e) {
+				throw new RuntimeException("Invalid Algorithm: " + e);
+			}
+			
+			user.setPassword(password);
 			user.setNumReviews(0);
 			user = userRepo.save(user);
 		}
@@ -183,6 +196,21 @@ public class DataSeeder {
 		review.setRating(dto.getRating());
 		review.setReviewBody(dto.getReviewBody());
 		review = reviewRepo.save(review);
+	}
+	
+	private String SHA256Hash(String input) throws NoSuchAlgorithmException {
+		// Hash password
+		MessageDigest md = MessageDigest.getInstance("SHA-256");
+		byte[] hash = md.digest(input.getBytes(StandardCharsets.UTF_8));
+		
+		// Convert hash to string
+		BigInteger number = new BigInteger(1, hash);
+		StringBuilder hexString = new StringBuilder(number.toString(16));
+		
+		// Fix string length to 64
+		while(hexString.length() < 64) hexString.insert(0, '0');
+		
+		return hexString.toString();
 	}
 	
 }

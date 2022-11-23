@@ -51,7 +51,7 @@
                     <div class="row text-center login-header">Login Form</div>
                     <div class="row acc-button">
                         <div class="signin">Sign in</div>
-                        <div class="register">Register</div>
+                        <div class="register" onclick="register()">Register</div>
                     </div>
                     <div class="row">
                         <input type="text" placeholder="Username" class="form-control br-10 acc-input">
@@ -68,8 +68,8 @@
                     <div class="modal-content">
                         <div class="row text-center login-header">Login Form</div>
                         <div class="row acc-button">
-                            <div class="signin">Sign in</div>
-                            <div class="register">Register</div>
+                            <div class="signin2" onclick="signin()">Sign in</div>
+                            <div class="register2">Register</div>
                         </div>
                         <div class="row">
                             <input type="text" placeholder="Username" class="form-control br-10 acc-input">
@@ -85,9 +85,15 @@
 
         <script>
             function signin(){
+                if($('#register').is(':visible')){
+                    $('#register').modal('hide')
+                }
                 $('#signin').modal('show')
             }
             function register(){
+                if($('#signin').is(':visible')){
+                    $('#signin').modal('hide')
+                }
                 $('#register').modal('show')
             }
         </script>

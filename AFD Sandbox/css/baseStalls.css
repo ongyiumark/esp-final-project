@@ -1,0 +1,69 @@
+
+#stall-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    font-size: 20px;
+    min-width: 90%;
+    margin: 50px 6.5vw;
+
+    flex-wrap: wrap;
+}
+
+.stall-card {
+    flex: 0 1 calc(calc(100% - 60px)/4);
+
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
+    border-radius: 19px;
+    background-color: rgb(237, 237, 237);
+    box-sizing: border-box;
+}
+
+.stall-card-img {
+    overflow: hidden;
+}
+
+.stall-card-img > img {
+    width: 100%;
+}
+
+.stall-card-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: .4em 1em .8em;
+}
+
+.stall-card-name {
+
+}
+
+.stall-card-location-name {
+    font-weight: bold;
+}
+
+.stall-card-stall-name {
+
+}
+
+.stall-card-rating {
+    display: flex;
+    flex: row;
+    gap: 5px;
+}
+
+.stall-card-star-container {
+
+}
+
+.stall-card-star-container > img{
+    height: 20px;
+}
+
+.stall-card-average-rating {
+    font-weight: bold;
+}
+

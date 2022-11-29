@@ -21,6 +21,44 @@
         <script src="js/custom.js"></script>
     </head>
     <body>
+        <!-- Sign in Modal -->
+        <div class="modal fade" id="signin" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="row text-center login-header">Login Form</div>
+                <div class="row acc-button">
+                    <div class="signin">Sign in</div>
+                    <div class="register" onclick="register()">Register</div>
+                </div>
+                <div class="row">
+                    <input type="text" placeholder="Username" class="form-control br-10 acc-input">
+                    <input type="password" placeholder="Password" class="form-control br-10 acc-input">
+                    <button class="button submit" type="button">Login</button>
+                </div>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Register Modal -->
+        <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="row text-center login-header">Login Form</div>
+                    <div class="row acc-button">
+                        <div class="signin2" onclick="signin()">Sign in</div>
+                        <div class="register2">Register</div>
+                    </div>
+                    <div class="row">
+                        <input type="text" placeholder="Username" class="form-control br-10 acc-input">
+                        <input type="text" placeholder="Password" class="form-control br-10 acc-input">
+                        <input type="text" placeholder="Confirm Password" class="form-control br-10 acc-input">
+                        <button class="button submit" type="button">Login</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN SCREEN -->
         <div class="headerImage-shortened" style="background-image: url('images/headerImage.jpg');">
             <nav>
                 <img class="image" src="images/afd.png" alt="logo">
@@ -33,52 +71,16 @@
                 </ul>
             </nav>
             <div class="row"><p class="header-quote">Reviews</p></div>
-            <div class="row mt-2">
+            <div class="row mt-4">
                 <input type="text" placeholder="Search..." class="form-control br-5 input-group">
                 <select class="form-select br-5 form-reviews" aria-label="Default select example">
                     <option disabled selected>Choose Type</option>
-                    <option value="1">Stall</option>
-                    <option value="2">Location</option>
+                    <option value="1">Stall Name</option>
+                    <option value="2">Username</option>
                 </select>
                 <button class="reviews-button br-5" type="button">Search</button>
             </div>
 
-            <!-- Sign in Modal -->
-            <div class="modal fade" id="signin" tabindex="-1" role="dialog" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="row text-center login-header">Login Form</div>
-                    <div class="row acc-button">
-                        <div class="signin">Sign in</div>
-                        <div class="register" onclick="register()">Register</div>
-                    </div>
-                    <div class="row">
-                        <input type="text" placeholder="Username" class="form-control br-10 acc-input">
-                        <input type="password" placeholder="Password" class="form-control br-10 acc-input">
-                        <button class="button submit" type="button">Login</button>
-                    </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Register Modal -->
-            <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="row text-center login-header">Login Form</div>
-                        <div class="row acc-button">
-                            <div class="signin2" onclick="signin()">Sign in</div>
-                            <div class="register2">Register</div>
-                        </div>
-                        <div class="row">
-                            <input type="text" placeholder="Username" class="form-control br-10 acc-input">
-                            <input type="text" placeholder="Password" class="form-control br-10 acc-input">
-                            <input type="text" placeholder="Confirm Password" class="form-control br-10 acc-input">
-                            <button class="button submit" type="button">Login</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </body>
 </html>

@@ -11,3 +11,11 @@ function register(){
     }
     $('#register').modal('show')
 }
+
+// Stall Modal
+function stallmodal(){
+    $('#stallmodal').modal('show')
+}
+function closeModal(){
+    $('#stallmodal').modal('hide')
+}

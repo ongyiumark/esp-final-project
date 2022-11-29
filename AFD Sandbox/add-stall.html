@@ -21,6 +21,44 @@
         <script src="js/custom.js"></script>
     </head>
     <body>
+        <!-- Sign in Modal -->
+        <div class="modal fade" id="signin" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="row text-center login-header">Login Form</div>
+                <div class="row acc-button">
+                    <div class="signin">Sign in</div>
+                    <div class="register" onclick="register()">Register</div>
+                </div>
+                <div class="row">
+                    <input type="text" placeholder="Username" class="form-control br-10 acc-input">
+                    <input type="password" placeholder="Password" class="form-control br-10 acc-input">
+                    <button class="button submit" type="button">Login</button>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Register Modal -->
+        <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="row text-center login-header">Login Form</div>
+                    <div class="row acc-button">
+                        <div class="signin2" onclick="signin()">Sign in</div>
+                        <div class="register2">Register</div>
+                    </div>
+                    <div class="row">
+                        <input type="text" placeholder="Username" class="form-control br-10 acc-input">
+                        <input type="text" placeholder="Password" class="form-control br-10 acc-input">
+                        <input type="text" placeholder="Confirm Password" class="form-control br-10 acc-input">
+                        <button class="button submit" type="button">Login</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- MAIN SCREEN -->
         <div class="headerImage-shortened" style="background-image: url('images/headerImage.jpg');">
             <nav>
                 <img class="image" src="images/afd.png" alt="logo">
@@ -34,42 +72,6 @@
             </nav>
             <div class="row"><p class="header-quote">Spot-A-Stall</p></div>
             <div class="row"><p class="header-sub-quote">Spot a new stall in campus? Feel free to add them to the list</p></div>
-            <!-- Sign in Modal -->
-            <div class="modal fade" id="signin" tabindex="-1" role="dialog" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="row text-center login-header">Login Form</div>
-                    <div class="row acc-button">
-                        <div class="signin">Sign in</div>
-                        <div class="register" onclick="register()">Register</div>
-                    </div>
-                    <div class="row">
-                        <input type="text" placeholder="Username" class="form-control br-10 acc-input">
-                        <input type="password" placeholder="Password" class="form-control br-10 acc-input">
-                        <button class="button submit" type="button">Login</button>
-                    </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Register Modal -->
-            <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="row text-center login-header">Login Form</div>
-                        <div class="row acc-button">
-                            <div class="signin2" onclick="signin()">Sign in</div>
-                            <div class="register2">Register</div>
-                        </div>
-                        <div class="row">
-                            <input type="text" placeholder="Username" class="form-control br-10 acc-input">
-                            <input type="text" placeholder="Password" class="form-control br-10 acc-input">
-                            <input type="text" placeholder="Confirm Password" class="form-control br-10 acc-input">
-                            <button class="button submit" type="button">Login</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </body>
 </html>

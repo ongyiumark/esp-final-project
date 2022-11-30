@@ -53,7 +53,7 @@ async function loadData() {
     // load stall data
     let stallData = await getData(`${BASE_URL}stall/list`)
     
-    // load attach location name and rating to each stall object
+    // attach location name and rating to each stall object
     let stallList = await Promise.all(stallData.map(async (stall) => {
         let reviewData = await getData(`${BASE_URL}review/stall`, {stallName: stall.stallName})
 

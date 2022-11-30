@@ -20,6 +20,7 @@
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/jquery-3.4.1.slim.min.js"></script> 
         <script src="js/custom.js"></script>
+        <script src="js/helper.js"></script>
         <script src="js/reviewPopulate.js" defer></script>
     </head>
     <body>
@@ -36,11 +37,11 @@
             </nav>
             <div class="row"><p class="header-quote">Reviews</p></div>
             <div class="row mt-2">
-                <input type="text" placeholder="Search..." class="form-control br-5 input-group">
-                <select class="form-select br-5 form-reviews" aria-label="Default select example">
-                    <option disabled selected>Choose Type</option>
-                    <option value="1">Stall</option>
-                    <option value="2">Location</option>
+                <input type="text" placeholder="Search..." class="form-control br-5 input-group" id = "search-input">
+                <select class="form-select br-5 form-reviews" aria-label="Default select example" id="search-select">
+                    <option disabled selected value = "none">Choose Type</option>
+                    <option value="stall">Stall</option>
+                    <option value="location">Location</option>
                 </select>
                 <button class="reviews-button br-5" type="button">Search</button>
             </div>

@@ -40,6 +40,7 @@
 
 // let stallList = [stallOne, stallTwo, stallThree, stallFour, stallFive]
 
+let allStallData;
 const stallContainer = document.getElementById("stall-container")
 
 async function loadData() {
@@ -84,7 +85,6 @@ async function loadData() {
 
     return stallList
 }
-
 
 function createStallCards(stallList) {
     for (var stall of stallList) {
@@ -142,16 +142,52 @@ function createStallCards(stallList) {
     }
 }
 
-function init() {
-    loadData()
-    .then((data) => {
-        createStallCards(data)  
-        //console.log(data)
-    })
-    .catch((error) => {
-        console.log(error)
+function updateStallCards() {
+    // remove all children of container
+    stallContainer.innerHTML = "";
+
+    searchSelect = document.getElementById("search-select")
+    searchInput = document.getElementById("search-input")
+
+    // output all stalls if search input is empty or if no search type is selected
+    if (searchInput.value == "" || searchSelect.value == "none") {
+        createStallCards(allStallData)
+        return;
+    } 
+
+    // regex the search
+    let filteredStallList = allStallData.filter((stall) => {
+        const re = new RegExp(searchInput.value.toLowerCase())
+        if (searchSelect.value == "stall") {
+            return re.test(stall.stallName.toLowerCase())
+        }
+        else if (searchSelect.value == "location") {
+            return re.test(stall.locationName.toLowerCase())
+        }
+        else {
+            console.log("This shouldn't be happening. Something is wrong")
+            // In the off chance this happens, we just show all stalls
+            return true
+        }
     })
 
+    createStallCards(filteredStallList)
+}
+
+function init() {
+    loadData()
+        .then((data) => {
+            createStallCards(data)  
+            allStallData = data
+        
+            // add listener to search input
+            searchInput = document.getElementById("search-input")
+            searchInput.addEventListener("input", updateStallCards);
+            //console.log(data)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
 
 }
 

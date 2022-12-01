@@ -1,32 +1,3 @@
-// var firstRev = {
-//     name: "Naik Oladive",
-//     date: "June 35, 2021",
-//     stallName: "Random Stall Name",
-//     rating: 4,
-//     reviewBody: "This is my review body hello world",
-//     reviewId: 1
-// }
-
-// var secondRev = {
-//     name: "Naik Oladive 1",
-//     date: "January 13, 2131",
-//     stallName: "Random Stall Name 1",
-//     rating: 5,
-//     reviewBody: "This is my review body hello world",
-//     reviewId: 2
-// }
-
-// var thirdRev = {
-//     name: "Naik Oladive 2",
-//     date: "March 16, 2001",
-//     stallName: "Random Stall Name 1",
-//     rating: 1,
-//     reviewBody: "This is my review body hello world",
-//     reviewId: 3
-// }
-
-// reviewList = [firstRev, secondRev, thirdRev]
-
 let allReviewData
 const reviewContainer = document.getElementById("review-container")
 

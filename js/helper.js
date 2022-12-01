@@ -15,7 +15,7 @@ async function getData(url='', params={}) {
         return (isJSON ? response.json() : response.text());
     }
 
-    throw new Error(await response.text());
+    throw await response.json()
 }
 
 // Helper function for POST method requests
@@ -44,5 +44,5 @@ async function postData(url='', data={}) {
         return (isJSON ? response.json() : response.text());
     }
 
-    throw new Error(await response.text());
+    throw await response.json()
 }

@@ -1,45 +1,3 @@
-// var stallOne = {
-//     stallName: "Sutra",
-//     stallLocationName: "Location Name",
-//     imagePath: "images/stallpic.png",
-//     stallId: 1,
-//     rating: 3.6
-// }
-
-// var stallTwo = {
-//     stallName: "Bacsilog",
-//     stallLocationName: "Location Name",
-//     imagePath: "images/stallpic.png",
-//     stallId: 2,
-//     rating: 5
-// }
-
-// var stallThree = {
-//     stallName: "three",
-//     stallLocationName: "Location Name",
-//     imagePath: "images/stallpic.png",
-//     stallId: 3,
-//     rating: 3.3
-// }
-
-// var stallFour = {
-//     stallName: "four",
-//     stallLocationName: "Location Name",
-//     imagePath: "images/stallpic.png",
-//     stallId: 4,
-//     rating: 4.4
-// }
-
-// var stallFive = {
-//     stallName: "five",
-//     stallLocationName: "Location Name",
-//     imagePath: "images/stallpic.png",
-//     stallId: 5,
-//     rating: 1.9
-// }
-
-// let stallList = [stallOne, stallTwo, stallThree, stallFour, stallFive]
-
 let allStallData;
 const stallContainer = document.getElementById("stall-container")
 
@@ -188,9 +146,7 @@ function init() {
         .catch((error) => {
             console.log(error)
         })
-
 }
-
 
 init()
 //createStallCards(stallList)

@@ -82,3 +82,19 @@ function createReviews(revList) {
 }
 
 createReviews(reviewList)
+
+sampleStall = {
+    name: "some name here",
+    rating: 4.7,
+    location: "Gonzaga Hall",
+    description: "some description here"
+}
+
+function supplySpecificStallDetails(stall) {
+    document.getElementById("specific-stall-name").textContent = stall.name
+    document.getElementById("rating-double").textContent = stall.rating + " / 5.0"
+    document.getElementById("specific-stall-location").textContent += stall.location
+    document.getElementById("specific-stall-description").textContent += stall.description
+}
+
+supplySpecificStallDetails(sampleStall)

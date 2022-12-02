@@ -189,12 +189,18 @@ acc{
 }
 
 /* profile */
+.profile-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 .profile-box{
     width:35vw;
     height:60vh; 
     border: 1px solid #A8A5A5;
-    justify-content: center;
-    
+    margin-top: 2vh;
+    text-align: -webkit-center;
+    text-align: -moz-center;
 }
 .custom-container{
     display:flex;
@@ -208,15 +214,9 @@ acc{
     margin-bottom: 2vh;
 }
 
-.row-content{
-   margin: 30px;
-   margin-left: 125px;
- 
-}
 .br-10{
     border-radius: 10px;
 }
 .form-control:focus {
     box-shadow: none;
-
 }

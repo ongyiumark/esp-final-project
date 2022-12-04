@@ -24,6 +24,87 @@
         <script src="js/baseStallPopulate.js" defer></script>
     </head>
     <body>
+        <!-- Sign in Modal -->
+        <div class="modal fade" id="signin" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="row text-center login-header">Login Form</div>
+                <div class="row acc-button">
+                    <div class="signin">Sign in</div>
+                    <div class="register" onclick="register()">Register</div>
+                </div>
+                <div class="row">
+                    <input type="text" placeholder="Username" class="form-control br-10 acc-input">
+                    <input type="password" placeholder="Password" class="form-control br-10 acc-input">
+                    <button class="button submit" type="button">Login</button>
+                </div>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Register Modal -->
+        <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="row text-center login-header">Login Form</div>
+                    <div class="row acc-button">
+                        <div class="signin2" onclick="signin()">Sign in</div>
+                        <div class="register2">Register</div>
+                    </div>
+                    <div class="row">
+                        <input type="text" placeholder="Username" class="form-control br-10 acc-input">
+                        <input type="text" placeholder="Password" class="form-control br-10 acc-input">
+                        <input type="text" placeholder="Confirm Password" class="form-control br-10 acc-input">
+                        <button class="button submit" type="button">Login</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stall Modal -->
+        <div class="modal fade" id="stallmodal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content stall-modal">
+                    <div class="modal-header">
+                        <img class="stall-photo" src="images/stallphoto.png" height="150" width="147.46">
+                        <div class="text">
+                            <h3>Potato Corner</h3>
+                            <h6>Ratings:
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="14" viewBox="0 3 30 29" fill="none">
+                                    <path d="M15 0L10.3635 9.39538L0 10.8933L7.5 18.2099L5.7269 28.5326L15 23.6617L24.2731 28.5326L22.5 18.2099L30 10.9035L19.6365 9.39538L15 0Z" fill="#FFE81B"/>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="14" viewBox="0 3 30 29" fill="none">
+                                    <path d="M15 0L10.3635 9.39538L0 10.8933L7.5 18.2099L5.7269 28.5326L15 23.6617L24.2731 28.5326L22.5 18.2099L30 10.9035L19.6365 9.39538L15 0Z" fill="#FFE81B"/>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="14" viewBox="0 3 30 29" fill="none">
+                                    <path d="M15 0L10.3635 9.39538L0 10.8933L7.5 18.2099L5.7269 28.5326L15 23.6617L24.2731 28.5326L22.5 18.2099L30 10.9035L19.6365 9.39538L15 0Z" fill="#FFE81B"/>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="14" viewBox="0 3 30 29" fill="none">
+                                    <path d="M15 0L10.3635 9.39538L0 10.8933L7.5 18.2099L5.7269 28.5326L15 23.6617L24.2731 28.5326L22.5 18.2099L30 10.9035L19.6365 9.39538L15 0Z" fill="#FFE81B"/>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="14" viewBox="0 3 30 29" fill="none">
+                                    <path d="M15 0L10.3635 9.39538L0 10.8933L7.5 18.2099L5.7269 28.5326L15 23.6617L24.2731 28.5326L22.5 18.2099L30 10.9035L19.6365 9.39538L15 0Z" fill="#FFE81B"/>
+                                </svg>
+                            </h6>
+                            <h6>Location: Gonzaga Hall</h6>
+                            <h6>Description: “World's Best Flavored French Fries”</h6>
+                        </div>
+                        <div class="x">
+                            <svg class="exit-x" onclick="closeModal()" width="35" height="35" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 45L0 40.5L18 22.5L0 4.5L4.5 0L22.5 18L40.5 0L45 4.5L27 22.5L45 40.5L40.5 45L22.5 27L4.5 45Z" fill="white" fill-opacity="0.35"/></svg>
+                        </div>
+                    </div>
+                    <div class="modal-body stall-modal-body">
+                        <div class="form-floating">
+                            <textarea class="form-control menu" placeholder="Menu List here" id="menuList" style="height: 30vh;"></textarea>
+                            <label for="menuList">Menu List</label>
+                        </div>
+                        <button class="btn btn-primary add" type="button">Add food item</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN SCREEN -->
         <div class="headerImage" style="background-image: url('images/headerImage.jpg');">
             <nav>
                 <img class="image" src="images/afd.png" alt="logo">
@@ -47,43 +128,9 @@
                     <option value="location">Location</option>
                 </select>
             </div>
-
-            <!-- Sign in Modal -->
-            <div class="modal fade" id="signin" tabindex="-1" role="dialog" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="row text-center login-header">Login Form</div>
-                    <div class="row acc-button">
-                        <div class="signin">Sign in</div>
-                        <div class="register" onclick="register()">Register</div>
-                    </div>
-                    <div class="row">
-                        <input type="text" placeholder="Username" class="form-control br-10 acc-input">
-                        <input type="password" placeholder="Password" class="form-control br-10 acc-input">
-                        <button class="button submit" type="button">Login</button>
-                    </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Register Modal -->
-            <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="row text-center login-header">Login Form</div>
-                        <div class="row acc-button">
-                            <div class="signin2" onclick="signin()">Sign in</div>
-                            <div class="register2">Register</div>
-                        </div>
-                        <div class="row">
-                            <input type="text" placeholder="Username" class="form-control br-10 acc-input">
-                            <input type="text" placeholder="Password" class="form-control br-10 acc-input">
-                            <input type="text" placeholder="Confirm Password" class="form-control br-10 acc-input">
-                            <button class="button submit" type="button">Login</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
+        <div class="container mt-4">
+            <button class="btn btn-primary" type="button" onclick="stallmodal()">Click here for stall modal</button>
         </div>
 
         <!-- Stall Container -->

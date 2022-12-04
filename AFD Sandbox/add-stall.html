@@ -9,6 +9,7 @@
         <!-- css -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/custom.css" rel="stylesheet">
+        <link href="css/add-stall.css", rel="stylesheet">
         
         <!-- Font references -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,138 +20,8 @@
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/jquery-3.4.1.slim.min.js"></script> 
         <script src="js/custom.js"></script>
-
-        <style>
-            #form-section {
-                display: flex;
-                justify-content: center;
-            }
-
-            #spot-a-stall-form {
-                display: flex;
-                flex-direction: row;
-                /* background-color: red; */
-                width: 90%;
-                max-width: 1200px;
-                height: fit-content;
-                min-height: 440px;
-                border: 1px solid black;
-                box-sizing: border-box;
-                padding: 40px;
-            }
-
-            #spot-a-stall-form form {
-                display: flex;
-                flex-direction: column;
-                width: 100%;
-            }
-
-            #spot-a-stall-form form > div{
-                display: flex;
-                /* flex-direction: column; */
-            }
-
-            #input-fields {
-                width: 60%;
-            }
-
-            #spot-a-stall-form .info-field {
-                margin-bottom: 20px;
-            }
-
-            #spot-a-stall-form label {
-                font-weight: bold;
-                font-family: "Roboto";
-                margin-right: 12px;
-                display: inline-block;
-                /* width: 15%; */
-                vertical-align: top;
-            }
-
-            #spot-a-stall-form input{
-                height: 32px;
-                width: 300px;
-                /* margin-top: 10px;
-                float: left; */
-            }
-
-            /* #spot-a-stall-form .info-field:last-of-type input{
-                height: 200px;
-            } */
-
-            .img-area {
-                position: relative;
-                width: 100%;
-                height: 100%;
-                background: #f2f2f2;
-                border-radius: 8px;
-                overflow: hidden;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-            }
-
-            .img-area::before {
-                content: attr(data-img);
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, .5);
-                color: #fff;
-                font-weight: 500;
-                text-align: center;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                pointer-events: none;
-                opacity: 0;
-                transition: all .3s ease;
-                z-index: 200;
-            }
-            .img-area.active:hover::before {
-                opacity: 1;
-            }
-
-            .img-area img {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                object-position: center;
-                z-index: 100;
-            }
-
-            #img-field {
-                height: 160px;
-                width: 200px;
-                border: 1px dashed black;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-
-            #save-button {
-                width: 160px;
-                margin: 40px 0 0 auto;
-            }
-
-            .select-image {
-                background: none;
-                color: inherit;
-                border: none;
-                padding: 0;
-                font: inherit;
-                cursor: pointer;
-                outline: inherit;
-                width: 90%;
-                height: 90%;
-            }
-        </style>
+        <script src="js/helper.js"></script>
+        <script src="js/add-stall.js" defer></script>
     </head>
     <body>
         <!-- Sign in Modal -->
@@ -241,38 +112,6 @@
                 </form>
             </div>
         </section>
-        <script>
-            const selectImage = document.getElementsByClassName('select-image')[0];
-            const inputFile = document.getElementById('file');
-            const imgArea = document.getElementsByClassName('img-area')[0];
-
-            selectImage.addEventListener('click', () => {
-                console.log("here")
-                inputFile.click();
-
-            })
-
-            inputFile.addEventListener('change', function () {
-                const image = this.files[0]
-                console.log("here")
-                if(image.size < 2000000) {
-                    const reader = new FileReader();
-                    reader.onload = ()=> {
-                        const allImg = imgArea.querySelectorAll('img');
-                        allImg.forEach(item=> item.remove());
-                        const imgUrl = reader.result;
-                        const img = document.createElement('img');
-                        img.src = imgUrl;
-                        imgArea.appendChild(img);
-                        imgArea.classList.add('active');
-                        imgArea.dataset.img = image.name;
-                    }
-                    reader.readAsDataURL(image);
-                } else {
-                    alert("Image size more than 2MB");
-                }
-            })
-        </script>
     </body>
 </html>
 

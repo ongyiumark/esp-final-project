@@ -46,3 +46,26 @@ async function postData(url='', data={}) {
 
     throw await response.json()
 }
+
+// Helper function for POST with multiform data
+async function postDataMultiform(url='', data={}) {
+    // Build form body from JSON
+    let formData = new FormData()
+    for (let property in data) {
+        formData.append(property, data[property]);
+    }
+
+    // Fetch URL
+    const response = await fetch(url, {
+        method: 'POST',
+        body: formData
+    });
+
+    // Try to parse as JSON, otherwise return as text
+    if (response.ok) {
+        let isJSON = response.headers.get('content-type').includes('application/json');
+        return (isJSON ? response.json() : response.text());
+    }
+
+    throw await response.json()
+}

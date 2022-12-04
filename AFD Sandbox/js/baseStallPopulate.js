@@ -62,7 +62,7 @@ function updateStallModal(stall) {
     modalName.textContent = stall.stallName
     modalLocation.textContent = stall.locationName
     modalDescription.textContent = stall.description
-    modalRatings.textContent = stall.rating
+    modalRatings.textContent = (stall.rating == 'N/A' ? stall.rating : `${stall.rating.toFixed(1)} / 5.0`)
 
     let menuList = ""
     for (let item of stall.items) {

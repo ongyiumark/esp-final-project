@@ -14,7 +14,10 @@ function register(){
 
 function writeReview() {
     $('#write-review').modal('show')
-    console.log("hello")
+    for (let i=1; i<=5; i++) {
+        $('#write-review-star-'+i).addClass("inactive-star")
+        $('#write-review-star-'+i).removeClass("active-star")
+    }
 }
 
 var starsSelected

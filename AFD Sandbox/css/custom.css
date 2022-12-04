@@ -229,3 +229,21 @@ option{
     border-color: rgba(37, 96, 249, 1);
 }
 
+/* write review modal  */
+#write-review > .modal-dialog > .modal-content {
+    width: 100% !important;
+}
+.row > img {
+    height: 60px;
+    width: 60px;
+}
+#row-star-cont {
+    display: flex !important;
+    flex-direction: row !important;
+}
+#write-review > .modal-dialog > .modal-content > .row > textarea {
+    width: 90%;
+    margin: 2em 0;
+}
+
+

@@ -11,3 +11,30 @@ function register(){
     }
     $('#register').modal('show')
 }
+
+function writeReview() {
+    $('#write-review').modal('show')
+    console.log("hello")
+}
+
+var starsSelected
+
+function clickStar(n) {
+    for (let i=1; i<=n; i++) {
+        $('#write-review-star-'+i).addClass("active-star")
+        $('#write-review-star-'+i).removeClass("inactive-star")
+    }
+    for (let j=n+1; j<=5; j++) {
+        $('#write-review-star-'+j).addClass("inactive-star")
+        $('#write-review-star-'+j).removeClass("active-star")
+    }
+    starsSelected = n
+}
+
+function submitReview() {
+    if (!starsSelected) {
+        console.log("invalid")
+        return
+    }
+    console.log(starsSelected)
+}

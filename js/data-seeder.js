@@ -139,6 +139,7 @@ const stallSeeder = [
             },
         ]
     },
+    // Follow the format above and make sure to put the image in FinalProjectDemo/images
 ];
 
 const userSeeder = [

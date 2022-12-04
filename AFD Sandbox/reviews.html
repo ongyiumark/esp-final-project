@@ -81,6 +81,29 @@
                     </div>
                 </div>
             </div>
+
+            <div class="modal fade" id="write-review" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="row login-header">Give Feedback</div>
+                        <div class="row">How would you rate this stall?</div>
+                        <div class="row" id="row-star-cont">
+                            <img src="images/star-solid.svg" id="write-review-star-1" class="inactive-star" onclick="clickStar(1)" alt="">
+                            <img src="images/star-solid.svg" id="write-review-star-2" class="inactive-star" onclick="clickStar(2)" alt="">
+                            <img src="images/star-solid.svg" id="write-review-star-3" class="inactive-star" onclick="clickStar(3)" alt="">
+                            <img src="images/star-solid.svg" id="write-review-star-4" class="inactive-star" onclick="clickStar(4)" alt="">
+                            <img src="images/star-solid.svg" id="write-review-star-5" class="inactive-star" onclick="clickStar(5)" alt="">
+                        </div>
+                        <div class="row" style="font-weight: bold;">
+                            Write your review
+                        </div>
+                        <div class="row">
+                            <textarea name="review-ta" id="review-ta" cols="20" rows="10" placeholder="How is your overall experience?"></textarea>
+                            <button class="button submit" onclick="submitReview()" type="button">Submit Review</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Stall Div  -->
@@ -101,7 +124,7 @@
                 </div>
             </div>
             <div id="specific-stall-review-button">
-                <a href="#">Write a Review</a>
+                <a href="#" onclick="writeReview()">Write a Review</a>
             </div>
         </div>
 

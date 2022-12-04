@@ -1,5 +1,6 @@
 package app.rest.controllers;
 
+import java.text.ParseException;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -28,8 +29,9 @@ public class ReviewController {
 	public Review addNewReview(@FormParam("userName") String userName,
 							@FormParam("stallName") String stallName,
 							@FormParam("reviewBody") String reviewBody,
-							@FormParam("rating") Integer rating) {
-		return rc.addNewReview(userName, stallName, reviewBody, rating);
+							@FormParam("rating") Integer rating,
+							@FormParam("reviewDate") String reviewDate) throws ParseException {
+		return rc.addNewReview(userName, stallName, reviewBody, rating, reviewDate);
 	}
 	
 	@GET

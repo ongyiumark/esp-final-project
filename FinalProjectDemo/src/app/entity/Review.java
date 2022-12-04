@@ -1,5 +1,7 @@
 package app.entity;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,7 +35,11 @@ public class Review {
 	@Column
 	@Size(max=150)
 	private String reviewBody;
-
+	
+	@Column
+	@NotNull
+	private Date reviewDate;
+	
 	public Long getReviewId() {
 		return reviewId;
 	}
@@ -74,10 +80,18 @@ public class Review {
 		this.reviewBody = reviewBody;
 	}
 
+	public Date getReviewDate() {
+		return reviewDate;
+	}
+
+	public void setReviewDate(Date reviewDate) {
+		this.reviewDate = reviewDate;
+	}
+
 	@Override
 	public String toString() {
 		return "Review [reviewId=" + reviewId + ", userId=" + userId + ", stallId=" + stallId + ", rating=" + rating
-				+ ", reviewBody=" + reviewBody + "]";
+				+ ", reviewBody=" + reviewBody + ", reviewDate=" + reviewDate + "]";
 	}
 	
 	

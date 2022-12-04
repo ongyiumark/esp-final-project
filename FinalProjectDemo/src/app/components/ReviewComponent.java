@@ -1,6 +1,10 @@
 package app.components;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 import javax.annotation.PostConstruct;
 
@@ -34,7 +38,8 @@ public class ReviewComponent {
 			String userName, 
 			String stallName, 
 			String reviewBody, 
-			Integer rating) {
+			Integer rating,
+			String reviewDate) throws ParseException {
 		// Find user corresponding to `userName`
 		User user = userRepo.findByUserName(userName);
 		if (user == null) {
@@ -61,6 +66,10 @@ public class ReviewComponent {
 		review.setStallId(stall.getStallId());
 		review.setReviewBody(reviewBody);
 		review.setRating(rating);
+		
+		SimpleDateFormat format = new SimpleDateFormat("MMMM dd, yyyy", Locale.US);
+		Date date = new Date(format.parse(reviewDate).getTime());
+		review.setReviewDate(date);
 		
 		// Update database
 		review = reviewRepo.save(review);

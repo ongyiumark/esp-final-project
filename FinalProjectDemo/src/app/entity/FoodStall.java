@@ -21,7 +21,7 @@ public class FoodStall {
 	private String stallName;
 	
 	@Column
-	@Size(max=100)
+	@Size(max=250)
 	private String description;
 	
 	@Column

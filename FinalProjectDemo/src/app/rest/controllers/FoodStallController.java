@@ -35,8 +35,9 @@ public class FoodStallController {
 			@FormParam("stallName") String stallName,
 			@FormParam("description") String description,
 			@FormParam("locationName") String locationName,
-			@FormParam("longitude") Double longitude,
+			@FormParam("imageName") String imageName,
+ 			@FormParam("longitude") Double longitude,
 			@FormParam("latitude") Double latitude) {
-		return fsc.addNewFoodStall(stallName, description, locationName, longitude, latitude);
+		return fsc.addNewFoodStall(stallName, description, imageName, locationName, longitude, latitude);
 	}
 }

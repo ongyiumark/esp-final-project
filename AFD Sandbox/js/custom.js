@@ -41,3 +41,12 @@ function submitReview() {
     }
     console.log(starsSelected)
 }
+
+// Stall Modal
+function stallmodal(){
+    $('#stallmodal').modal('show');
+}
+
+function closeModal(){
+    $('#stallmodal').modal('hide');
+}

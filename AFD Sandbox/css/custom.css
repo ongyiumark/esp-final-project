@@ -229,41 +229,21 @@ option{
     border-color: rgba(37, 96, 249, 1);
 }
 
-/* Stall Modal */
-.stall-modal{
-    background-color: #1B065E;
-    color: #fff;
+/* write review modal  */
+#write-review > .modal-dialog > .modal-content {
+    width: 100% !important;
 }
-.stall-modal-body{
-    background-color: #fff;
-    border-radius: 0 0 9.3px 9.3px;
-    color:black;
+.row > img {
+    height: 60px;
+    width: 60px;
 }
-.stall-photo{
-    border: 5px solid #fff;
-    border-radius: 50%;
+#row-star-cont {
+    display: flex !important;
+    flex-direction: row !important;
 }
-.text{
-    font-family: 'Roboto', sans-serif;
-    margin-left: 1.5vw;
-    padding-top: 2vh;
-    height: 24vh;
-    width: 100%;
+#write-review > .modal-dialog > .modal-content > .row > textarea {
+    width: 90%;
+    margin: 2em 0;
 }
-.x{
-    height: 24vh;
-    align-items: flex-start;
-}
-.exit-x{
-    cursor: pointer;
-}
-.add{
-    margin-top: 1.5vh;
-    float: right;
-}
-svg{
-    overflow: visible;
-}
-.menu{
-    overflow-y: scroll;
-}
+
+

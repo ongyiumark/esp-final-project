@@ -1,0 +1,112 @@
+#review-container {
+    height: 100vh;  
+    margin: 50px 6.5vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.review-card {
+    border: 1px solid black;
+    padding: 2vh 5vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.review-details {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+}
+
+.reviewer-name {
+    font-weight: bold;
+}
+
+.review-date {
+    color: #585858;
+}
+
+.review-stall-name {
+    color: white; 
+    background-color: #1B065E;
+    padding: 5px 1.5em;
+    border-radius: 50px;
+}
+
+.review-stars {
+    margin-bottom: 20px;
+}
+
+.review-stars > img {
+    height: 20px;
+}
+
+.active-star {
+    filter: invert(50%) sepia(100%) saturate(600%) hue-rotate(0deg) brightness(118%) contrast(300%);
+}
+
+.inactive-star {
+    filter: invert(100%) sepia(100%) saturate(50%) hue-rotate(0deg) brightness(90%) contrast(50%);
+}
+
+/* specific stall */
+
+#specific-stall {
+    display: flex;
+    flex-direction: row;
+    background-image: linear-gradient(#2560F9, #00AF9A);
+    padding: 2vh 6.5vw;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#specific-stall-details1 {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    align-items: center;
+}
+
+#specific-stall-pic > img {
+    height: 300px;
+    border: 8px solid white;
+    border-radius: 50%;
+}
+
+#specific-stall-details {
+    color: white;
+    font-weight: bold;
+}
+
+#specific-stall-name {
+    font-size: 48px;
+}
+
+#specific-stall-ratings {
+    font-size: 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+#specific-stall-location {
+    font-size: 24px;
+}
+
+#specific-stall-description {
+    font-size: 24px;
+}
+
+#specific-stall-review-button > a {
+    font-size: 32px;
+    background-color: #1B065E;
+    border-radius: 15px;
+    padding: 1em 1.5em;
+}
+
+#specific-stall-ratings > img {
+    height: 20px;
+}
+

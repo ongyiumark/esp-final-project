@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-@Entity(name="images_table")
+@Entity(name="image_table")
 public class Image {
 	@Column
 	@Id

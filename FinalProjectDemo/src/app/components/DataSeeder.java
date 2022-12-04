@@ -43,11 +43,11 @@ public class DataSeeder {
 	@PostConstruct
 	public void init() throws Exception {
 		if (itemRepo.count() == 0) {
-			initFoods();
+			//initFoods();
 		}
 		
 		if (reviewRepo.count() == 0) {
-			initReviews();
+			//initReviews();
 		}
 	}
 	

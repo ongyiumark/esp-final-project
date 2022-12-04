@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import app.entity.FoodStall;
+import app.entity.Image;
 import app.entity.Location;
 import app.repository.FoodStallRepository;
+import app.repository.ImageRepository;
 import app.repository.LocationRepository;
 
 @Component
@@ -19,6 +21,9 @@ public class FoodStallComponent {
 	
 	@Autowired
 	LocationRepository locationRepo;  
+	
+	@Autowired
+	ImageRepository imageRepo;
 	
 
 	@PostConstruct
@@ -34,6 +39,7 @@ public class FoodStallComponent {
 	public FoodStall addNewFoodStall(
 			String stallName,
 			String description, 
+			String imageName,
 			String locationName, 
 			Double longitude, 
 			Double latitude) {
@@ -51,6 +57,16 @@ public class FoodStallComponent {
 			loc = locationRepo.save(loc);
 		}
 		
+		Image img = imageRepo.findByFileName(imageName);
+		if (img == null) {
+			// Instantiate new image
+			img = new Image();
+			img.setFileName(imageName);
+			
+			// Update database
+			img = imageRepo.save(img);
+		}
+		
 		// Check if food stall already exists in the same location
 		FoodStall stall = stallRepo.findByStallNameAndLocationId(stallName, 
 				loc.getLocationId());
@@ -62,6 +78,7 @@ public class FoodStallComponent {
 		stall.setDescription(description);
 		stall.setLocationId(loc.getLocationId());
 		stall.setStallName(stallName);
+		stall.setImageId(img.getImageId());
 
 		// Update database
 		stall = stallRepo.save(stall);

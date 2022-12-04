@@ -19,7 +19,7 @@ public class Location {
 	
 	@Column
 	@NotNull
-	@Size(max=25)
+	@Size(max=30)
 	private String locationName;
 	
 	@Column

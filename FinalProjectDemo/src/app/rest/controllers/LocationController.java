@@ -33,7 +33,7 @@ public class LocationController {
 	@GET
 	@Path("/list")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Location> addNewLocation() {
+	public List<Location> getAllLocations() {
 		return lc.getAllLocations();
 	}
 }

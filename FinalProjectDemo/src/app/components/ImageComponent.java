@@ -27,6 +27,21 @@ public class ImageComponent {
 		return imageRepo.findAll();
 	}
 	
+	public Image addNewImage(String filename) {
+		Image img = imageRepo.findByFileName(filename);
+		// Check if file exists.
+		if (img != null) {
+			throw new RuntimeException(
+					String.format("File '%s' already exists.", filename)
+					);
+		}
+		
+		img = new Image();
+        img.setFileName(filename);
+        img = imageRepo.save(img);
+        return img;
+	}
+	
 	public Image saveFile(InputStream uploadedInputStream, String filename) {
 		Image img = imageRepo.findByFileName(filename);
 		// Check if file exists.

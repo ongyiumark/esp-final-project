@@ -1,7 +1,10 @@
 let allStallData;
+
 const stallContainer = document.getElementById("stall-container")
 
 async function loadData() {
+    let itemData = await getData(`${BASE_URL}food/list`)
+
     // load location data
     let locationData = await getData(`${BASE_URL}location/list`)
 
@@ -38,10 +41,35 @@ async function loadData() {
                 stall['imagePath'] = `../FinalProjectDemo/images/${img.fileName}`;
             }
         }
+
+        stall['items'] = itemData.filter((item) => (item.stallId == stall.stallId));
+
         return stall
     }))
 
     return stallList
+}
+
+function updateStallModal(stall) {
+    modalImg = document.getElementById("stall-modal--image")
+    modalName = document.getElementById("stall-modal--name")
+    modalLocation = document.getElementById("stall-modal--location")
+    modalDescription = document.getElementById("stall-modal--description")
+    modalRatings = document.getElementById("stall-modal--ratings")
+    modalMenu = document.getElementById("menu-list")
+
+    modalImg.src = stall.imagePath
+    modalName.textContent = stall.stallName
+    modalLocation.textContent = stall.locationName
+    modalDescription.textContent = stall.description
+    modalRatings.textContent = stall.rating
+
+    let menuList = ""
+    for (let item of stall.items) {
+        menuList += `${item.itemName} - ₱${item.price}\n`
+    }
+    modalMenu.value = menuList
+    stallmodal()
 }
 
 function createStallCards(stallList) {
@@ -98,6 +126,12 @@ function createStallCards(stallList) {
         currentCard.appendChild(stallCardImgDiv)
         currentCard.appendChild(stallCardDetailsDiv)
     }
+
+    // Set up cards to be clickable
+    for (let stall of stallList) {
+        currentCard = document.getElementById("stallCard#"+stall.stallId)
+        currentCard.addEventListener("click", () => updateStallModal(stall), false);
+    }
 }
 
 function updateStallCards() {
@@ -133,6 +167,7 @@ function updateStallCards() {
 }
 
 function init() {
+    // Load stall data
     loadData()
         .then((data) => {
             createStallCards(data)  
@@ -144,7 +179,7 @@ function init() {
             //console.log(data)
         })
         .catch((error) => {
-            console.log(error)
+            console.log(error.message)
         })
 }
 

@@ -1,45 +1,48 @@
-var stallOne = {
-    stallName: "Sutra",
-    stallLocationName: "Location Name",
-    imagePath: "images/stallpic.png",
-    stallId: 1,
-    rating: 3.6
-}
-
-var stallTwo = {
-    stallName: "Bacsilog",
-    stallLocationName: "Location Name",
-    imagePath: "images/stallpic.png",
-    stallId: 2,
-    rating: 5
-}
-
-var stallThree = {
-    stallName: "three",
-    stallLocationName: "Location Name",
-    imagePath: "images/stallpic.png",
-    stallId: 3,
-    rating: 3.3
-}
-
-var stallFour = {
-    stallName: "four",
-    stallLocationName: "Location Name",
-    imagePath: "images/stallpic.png",
-    stallId: 4,
-    rating: 4.4
-}
-
-var stallFive = {
-    stallName: "five",
-    stallLocationName: "Location Name",
-    imagePath: "images/stallpic.png",
-    stallId: 5,
-    rating: 1.9
-}
-
-var stallList = [stallOne, stallTwo, stallThree, stallFour, stallFive]
+let allStallData;
 const stallContainer = document.getElementById("stall-container")
+
+async function loadData() {
+    // load location data
+    let locationData = await getData(`${BASE_URL}location/list`)
+
+    // load image data
+    let imageData = await getData(`${BASE_URL}image/list`)
+
+    // load stall data
+    let stallData = await getData(`${BASE_URL}stall/list`)
+    
+    // attach location name and rating to each stall object
+    let stallList = await Promise.all(stallData.map(async (stall) => {
+        let reviewData = await getData(`${BASE_URL}review/stall`, {stallName: stall.stallName})
+
+        // average ratings
+        let totalRating = 0;
+        let numRatings = reviewData.length
+        for (let review of reviewData) {
+            totalRating += review.rating
+        }
+        let avgRating = (numRatings == 0 ? 'N/A': totalRating/numRatings)
+        stall['rating'] = avgRating
+
+        // get location name
+        for (let loc of locationData) {
+            if (stall.locationId == loc.locationId) {
+                stall['locationName'] = loc.locationName;
+            }
+        }
+
+        stall['imagePath'] = 'images/stallpic.png'
+        // get image path
+        for (let img of imageData) {
+            if (stall.imageId == img.imageId) {
+                stall['imagePath'] = `../FinalProjectDemo/images/${img.fileName}`;
+            }
+        }
+        return stall
+    }))
+
+    return stallList
+}
 
 function createStallCards(stallList) {
     for (var stall of stallList) {
@@ -67,7 +70,7 @@ function createStallCards(stallList) {
         // name div
         var stallCardLocationNameDiv = document.createElement("div")
         stallCardLocationNameDiv.classList.add("stall-card-location-name")
-        stallCardLocationNameDiv.textContent = stall.stallLocationName
+        stallCardLocationNameDiv.textContent = stall.locationName
         var stallCardStallNameDiv = document.createElement("div")
         stallCardStallNameDiv.classList.add("stall-card-stall-name")
         stallCardStallNameDiv.textContent = stall.stallName
@@ -97,4 +100,53 @@ function createStallCards(stallList) {
     }
 }
 
-createStallCards(stallList)
+function updateStallCards() {
+    // remove all children of container
+    stallContainer.innerHTML = "";
+
+    searchSelect = document.getElementById("search-select")
+    searchInput = document.getElementById("search-input")
+
+    // output all stalls if search input is empty or if no search type is selected
+    if (searchInput.value == "" || searchSelect.value == "none") {
+        createStallCards(allStallData)
+        return;
+    } 
+
+    // regex the search
+    let filteredStallList = allStallData.filter((stall) => {
+        const re = new RegExp(searchInput.value.toLowerCase())
+        if (searchSelect.value == "stall") {
+            return re.test(stall.stallName.toLowerCase())
+        }
+        else if (searchSelect.value == "location") {
+            return re.test(stall.locationName.toLowerCase())
+        }
+        else {
+            console.log("This shouldn't be happening. Something is wrong")
+            // In the off chance this happens, we just show all stalls
+            return true
+        }
+    })
+
+    createStallCards(filteredStallList)
+}
+
+function init() {
+    loadData()
+        .then((data) => {
+            createStallCards(data)  
+            allStallData = data
+        
+            // add listener to search input
+            searchInput = document.getElementById("search-input")
+            searchInput.addEventListener("input", updateStallCards);
+            //console.log(data)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+}
+
+init()
+//createStallCards(stallList)

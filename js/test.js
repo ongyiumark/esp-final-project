@@ -142,6 +142,7 @@ function init() {
                 parseResponse(data);
             })
             .catch((error) => {
+                console.log(error.message)
                 parseResponse(error.message);
             })
     });
@@ -163,7 +164,7 @@ function init() {
                 parseResponse(data);
             })
             .catch((error) => {
-                console.log(error);
+                console.log(error.message)
                 parseResponse(error.message);
             })
     });

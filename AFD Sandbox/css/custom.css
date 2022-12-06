@@ -194,6 +194,10 @@ acc{
     border-radius: 10px;
     justify-content: center;
 }
+.modal-header{
+    align-items: flex-start;
+    column-gap: 1vw;
+}
 .login-header{
     font-family: 'Roboto', sans-serif;
     font-size: 4vh;

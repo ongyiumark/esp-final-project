@@ -246,4 +246,48 @@ option{
     margin: 2em 0;
 }
 
+/* Login and Register */
+.warning {
+    color: red;
+    font-size: 2vh;
+    text-align: center;
+    margin: auto;
+    padding-bottom: 2vh;
+}
 
+#user-welcome-container {
+    position: relative;
+    display: inline;
+}
+
+#user-welcome {
+    display: inline;
+    padding: 0;
+}
+
+.user-dropdown {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    color: #000000;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.user-dropdown a {
+    color: black;
+    padding: 5px 10px;
+    height: 45px;
+    text-decoration: none;
+    display: block;
+    font-size: 2vh;
+    margin: 0;
+    line-height: 30px;
+}
+
+#welcome-login-register:hover .user-dropdown {
+    display: block;
+}

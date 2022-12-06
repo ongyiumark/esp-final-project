@@ -170,6 +170,6 @@ const reviewSeeder = [
         "stallName": "Tender Juicy",
         "rating": 3,
         "reviewDate": "December 2, 2022",
-        "reviewBody": "Visited Blue Alley yesterday. The ambience was nice and the service was just ok, but the value for money was great. Overall, pretty good."
+        "reviewBody": "Tender juicy is tender juicy."
     }
 ];

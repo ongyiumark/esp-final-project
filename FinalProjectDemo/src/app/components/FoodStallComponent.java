@@ -58,14 +58,6 @@ public class FoodStallComponent {
 		}
 		
 		Image img = imageRepo.findByFileName(imageName);
-		if (img == null) {
-			// Instantiate new image
-			img = new Image();
-			img.setFileName(imageName);
-			
-			// Update database
-			img = imageRepo.save(img);
-		}
 		
 		// Check if food stall already exists in the same location
 		FoodStall stall = stallRepo.findByStallNameAndLocationId(stallName, 
@@ -78,7 +70,7 @@ public class FoodStallComponent {
 		stall.setDescription(description);
 		stall.setLocationId(loc.getLocationId());
 		stall.setStallName(stallName);
-		stall.setImageId(img.getImageId());
+		if (img != null) stall.setImageId(img.getImageId());
 
 		// Update database
 		stall = stallRepo.save(stall);

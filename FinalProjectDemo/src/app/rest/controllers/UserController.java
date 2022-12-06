@@ -55,4 +55,11 @@ public class UserController {
 		return uc.getAllUsers();
 	}
 	
+	@GET
+	@Path("/session")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User compareKey(@QueryParam("sessionKey") String sessionKey) {
+		return uc.compareKey(sessionKey);
+	}
+	
 }

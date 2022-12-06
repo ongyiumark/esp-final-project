@@ -123,6 +123,15 @@ public class UserComponent {
 		return "Logged out successfully.";
 	}
 	
+	public User compareKey(String sessionKey) {
+		Session session = sessionRepo.findBySessionKey(sessionKey);
+		if (session == null) {
+			throw new RuntimeException("Invalid session key.");
+		}
+		
+		return userRepo.findByUserId(session.getUserId());
+	}
+	
 	public List<User> getAllUsers() {
 		List<User> users = userRepo.findAll();
 		

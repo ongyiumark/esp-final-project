@@ -24,10 +24,16 @@
 
 .stall-card-img {
     overflow: hidden;
+    display: flex;
+    justify-content: center;
 }
 
 .stall-card-img > img {
-    width: 100%;
+    width: auto;
+    height: auto;
+    max-height: 300px;
+    max-width: 100%;
+    align-self: center;
 }
 
 .stall-card-details {

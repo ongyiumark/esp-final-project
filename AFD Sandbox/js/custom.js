@@ -1,5 +1,5 @@
 function updateNav() {
-    SESSION_KEY = localStorage.getItem("SESSION_KEY")
+    let SESSION_KEY = localStorage.getItem("SESSION_KEY")
     if($('#user-welcome-container').is(':visible')){
         $('#user-welcome-container').hide()
     }

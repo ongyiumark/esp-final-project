@@ -1,13 +1,32 @@
 async function addStall() {
+    let SESSION_KEY = localStorage.getItem("SESSION_KEY")
+    let user
+    if (SESSION_KEY != null) {
+        try {
+            user = await getData(`${BASE_URL}user/session`, {'sessionKey': SESSION_KEY})
+        }
+        catch(error) {
+            console.log(error)
+        }
+    }
+    if (!user) {
+        signin()
+        throw "Sign in required."
+    }
+
+    let saveResponse = document.getElementById('save-response')
+
     let stallName = document.getElementById("sname").value;
     let locationName = document.getElementById("lname").value;
     let description = document.getElementById("description").value;
 
     if (stallName == "") {
+        saveResponse.textContent = "Please provide a stall name."
         throw "Please provide a stall name."
     } 
 
     if (locationName == "") {
+        saveResponse.textContent = "Please provide a location."
         throw "Please provide a location."
     }
 
@@ -29,12 +48,20 @@ async function addStall() {
         console.log(image)
     }
 
+    let found = 0;
     for (let location of locationData) {
         if (location.locationName == locationName) {
             stall['latitude'] = location.latitude;
             stall['longitude'] = location.longitude; 
+            found = 1
         }
     }
+    if (!found) {
+        saveResponse.textContent = `'${locationName}' is not a valid location.`
+        throw "Please provide a valid location."
+    }
+
+
     
     let stallRes = await postData(`${BASE_URL}stall/new`, stall)
     return stallRes

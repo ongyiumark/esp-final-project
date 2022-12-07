@@ -23,17 +23,17 @@
 }
 
 .stall-card-img {
-    overflow: hidden;
     display: flex;
     justify-content: center;
+    align-items: center;
+    overflow: hidden
 }
 
 .stall-card-img > img {
-    width: auto;
-    height: auto;
     max-height: 300px;
-    max-width: 100%;
-    align-self: center;
+    flex-shrink: 0;
+    /* min-width: 100%; */
+    min-height: 100%
 }
 
 .stall-card-details {

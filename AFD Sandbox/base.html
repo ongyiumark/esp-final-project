@@ -68,7 +68,9 @@
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content stall-modal">
                     <div class="modal-header">
-                        <img class="stall-photo" src="images/stallphoto.png" height="150" width="147.46" id="stall-modal--image">
+                        <div class="image-container">
+                            <img class="stall-photo" src="images/stallphoto.png" id="stall-modal--image">
+                        </div>
                         <div class="text">
                             <h3 id="stall-modal--name">Potato Corner</h3>
                             <h6>Ratings:
@@ -78,18 +80,43 @@
                                 <span id="stall-modal--ratings">N/A</span>
                             </h6>
                             <h6>Location: <span id="stall-modal--location">Gonzaga Hall</span></h6>
-                            <h6>Description: <span id="stall-modal--description">World's Best Flavored French Fries</span></h6>
+                            <h6>Description: <span id="stall-modal--description" style="overflow-wrap: break-word;">World's Best Flavored French Fries</span></h6>
                         </div>
                         <div class="x">
-                            <svg class="exit-x" onclick="closeModal()" width="35" height="35" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 45L0 40.5L18 22.5L0 4.5L4.5 0L22.5 18L40.5 0L45 4.5L27 22.5L45 40.5L40.5 45L22.5 27L4.5 45Z" fill="white" fill-opacity="0.35"/></svg>
+                            <svg class="exit-x" style="cursor: pointer;" onclick="closeModal()" width="35" height="35" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4.5 45L0 40.5L18 22.5L0 4.5L4.5 0L22.5 18L40.5 0L45 4.5L27 22.5L45 40.5L40.5 45L22.5 27L4.5 45Z" fill="white" fill-opacity="0.35"/></svg>
                         </div>
                     </div>
                     <div class="modal-body stall-modal-body">
                         <div class="form-floating">
-                            <textarea readonly class="form-control menu" placeholder="Menu List here" id="menu-list" style="height: 30vh;"></textarea>
+                            <textarea readonly class="form-control" placeholder="Menu List here" id="menu-list" style="height: 30vh;"></textarea>
                             <label for="menu-list">Menu List</label>
                         </div>
-                        <button class="btn btn-primary add" type="button">Add food item</button>
+                        <div class="button-container">
+                            <button class="btn btn-primary" type="button">Add food item</button>
+                        </div>
+                        <h5>Input Food Details</h5>
+                        <div class="form-group row">
+                            <label for="input-food-name" class="col-sm-4 col-form-label">Food Name:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="input-food-name">
+                            </div>
+                        </div>
+                        <div class="form-group row mt-2">
+                            <label for="input-food-price" class="col-sm-4 col-form-label">Price:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="input-food-price">
+                            </div>
+                        </div>
+                        <div class="form-group row mt-2">
+                            <label for="input-food-description" class="col-sm-4 col-form-label">Description:</label>
+                            <div class="col-sm-8">
+                                <textarea type="text" class="form-control" id="input-food-description"></textarea>
+                            </div>
+                        </div>
+                        <div class="button-container">
+                            <button class="btn btn-success" style="margin-right: 1vw;" type="button">Save</button>
+                            <button class="btn btn-secondary" type="button">Cancel</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -130,9 +157,6 @@
                 </select>
             </div>
         </div>
-        <!-- <div class="container mt-4">
-            <button class="btn btn-primary" type="button" onclick="stallmodal()">Click here for stall modal</button>
-        </div> -->
 
         <!-- Stall Container -->
         <div id="stall-container"></div>

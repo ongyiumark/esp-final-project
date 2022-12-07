@@ -6,7 +6,7 @@
     font-size: 20px;
     min-width: 90%;
     margin: 50px 6.5vw;
-
+    cursor: pointer;
     flex-wrap: wrap;
 }
 
@@ -73,3 +73,35 @@
     font-weight: bold;
 }
 
+.stall-modal{
+    background-color: #1B065E;
+    color: #fff;
+}
+
+.stall-modal-body{
+    background-color: #fff;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: black;
+}
+.stall-photo{
+    border-radius: 50%;
+    border: 6px solid #fff;
+    width: inherit;
+    height: inherit;
+}
+.image-container{
+    width: 150px;
+    height: 150px;
+}
+.button-container{
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: right;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+.text{
+    width: 100%;
+}

@@ -11,7 +11,7 @@ async function addStall() {
     }
     if (!user) {
         signin()
-        throw "Sign in required."
+        throw new Error("Sign in required.")
     }
 
     let saveResponse = document.getElementById('save-response')

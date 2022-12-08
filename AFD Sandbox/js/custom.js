@@ -123,14 +123,6 @@ function register(){
     $('#register').modal('show')
 }
 
-function writeReview() {
-    $('#write-review').modal('show')
-    for (let i=1; i<=5; i++) {
-        $('#write-review-star-'+i).addClass("inactive-star")
-        $('#write-review-star-'+i).removeClass("active-star")
-    }
-}
-
 var starsSelected
 
 function clickStar(n) {
@@ -143,14 +135,6 @@ function clickStar(n) {
         $('#write-review-star-'+j).removeClass("active-star")
     }
     starsSelected = n
-}
-
-function submitReview() {
-    if (!starsSelected) {
-        console.log("invalid")
-        return
-    }
-    console.log(starsSelected)
 }
 
 // Stall Modal

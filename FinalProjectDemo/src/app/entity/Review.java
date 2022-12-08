@@ -33,7 +33,7 @@ public class Review {
 	private Integer rating;
 	
 	@Column
-	@Size(max=150)
+	@Size(max=300)
 	private String reviewBody;
 	
 	@Column

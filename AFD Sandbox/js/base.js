@@ -115,7 +115,7 @@ function createStallCards(stallList) {
         stallCardStarContainerDiv.appendChild(stallCardStarContainerDivImg)
         var stallCardAverageRatingDiv = document.createElement("div")
         stallCardAverageRatingDiv.classList.add("stall-card-average-rating")
-        stallCardAverageRatingDiv.textContent = stall.rating
+        stallCardAverageRatingDiv.textContent = (stall.rating == 'N/A' ? stall.rating : `${stall.rating.toFixed(1)}`)
     
         stallCardRatingDiv.appendChild(stallCardStarContainerDiv)
         stallCardRatingDiv.appendChild(stallCardAverageRatingDiv)
@@ -219,6 +219,11 @@ async function saveFood() {
     if (inputName.value.trim().length == 0) {
         responseDiv.textContent = "Please provide an food name."
         throw new Error("Item name was not provided.")
+    }
+
+    if (inputName.value.trim().length > 25) {
+        responseDiv.textContent = "Please provide a shorter food name."
+        throw new Error("Item name was too long.")
     }
 
     if (inputPrice.value.trim().length == 0) {

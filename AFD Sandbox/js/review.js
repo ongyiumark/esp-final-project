@@ -30,8 +30,7 @@ async function loadData() {
 async function updateReviews() {
     // remove all children of container
     reviewContainer.innerHTML = "";
-    let stallHeader = document.getElementById('specific-stall')
-    if (stallHeader) stallHeader.setAttribute("hidden", "")
+    $('#specific-stall').hide()
 
     searchSelect = document.getElementById("search-select")
     searchInput = document.getElementById("search-input")
@@ -43,7 +42,8 @@ async function updateReviews() {
 
     // handle this later
     if (searchSelect.value == 'user') {
-        return allReviews
+        let filteredReviews = allReviews.filter((review) => (review.userName == searchInput.value))
+        return filteredReviews
     }
 
     // Attach image and location
@@ -53,7 +53,9 @@ async function updateReviews() {
 
     let currStall;
     for (let stall of stallData) {
-        if (stall.stallName != searchInput.value) continue
+        if (stall.stallName.toLowerCase() != searchInput.value.trim().toLowerCase()) continue
+
+        searchInput.value = stall.stallName
         currStall = {}
         let reviewData = await getData(`${BASE_URL}review/stall`, {stallName: stall.stallName})
 
@@ -86,7 +88,7 @@ async function updateReviews() {
     }
 
     if (currStall) {
-        stallHeader.removeAttribute("hidden");
+        $('#specific-stall').show()
         document.getElementById('specific-stall-img').src = currStall.imagePath
         document.getElementById("specific-stall-name").textContent = currStall.stallName
         document.getElementById("rating-double").textContent = (currStall.rating == 'N/A' ? currStall.rating : `${currStall.rating.toFixed(1)} / 5.0`)
@@ -96,8 +98,6 @@ async function updateReviews() {
         let filteredReviews = allReviews.filter((review) => (review.stallName == searchInput.value))
         return filteredReviews
     }
-
-    
 
     return allReviews
 }
@@ -155,9 +155,88 @@ function createReviews(revList) {
     }
 }
 
+async function submitReview(reviewData) {
+    let reviewResponse = document.getElementById("review-response")
+
+    if (!starsSelected) {
+        reviewResponse.textContent = "Please select a rating."
+        throw new Error("Rating was not selected.")
+    }
+    reviewData['rating'] = parseInt(starsSelected)
+
+    let reviewInput = document.getElementById("review-ta")
+    if (reviewInput.value.trim().length > 300) {
+        reviewResponse.textContent = "Please write a shorter review."
+        throw new Error("Review body is too long.")
+    }
+
+    reviewData['reviewBody'] = reviewInput.value
+
+    let today = new Date()
+    let monthsStr = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    reviewData['reviewDate'] = `${monthsStr[today.getMonth()]} ${String(today.getDate()).padStart(2,'0')}, ${today.getFullYear()}`
+
+    let reviewRes
+    try {
+        reviewRes = await postData(`${BASE_URL}review/new`, reviewData)
+        allReviews = await loadData()
+        updateReviews()
+            .then((data) => createReviews(data))
+            .catch((error) => {throw error})
+    }
+    catch (error) {
+        throw error
+    }
+    return reviewRes
+}
+
+async function writeReview() {
+    // check if user is signed in
+    let SESSION_KEY = localStorage.getItem("SESSION_KEY")
+    let user
+    if (SESSION_KEY != null) {
+        try {
+            user = await getData(`${BASE_URL}user/session`, {'sessionKey': SESSION_KEY})
+        }
+        catch(error) {
+            console.log(error)
+        }
+    }
+    if (!user) {
+        signin()
+        throw new Error("Sign in required.")
+    }
+
+    $('#write-review').modal('show')
+    for (let i=1; i<=5; i++) {
+        $('#write-review-star-'+i).addClass("inactive-star")
+        $('#write-review-star-'+i).removeClass("active-star")
+    }
+
+    let stallName = document.getElementById("specific-stall-name").textContent
+
+    // collect review data
+    let reviewData = {
+        "userName": user.userName,
+        "stallName": stallName
+    }
+
+
+    let submitButton = document.getElementById("submit-review-button")
+    submitButton.addEventListener("click", () => {
+        submitReview(reviewData)
+            .then((data) => {
+                console.log(data)
+                $('#write-review').modal('hide')
+            })
+            .catch((error) => console.log(error.message))
+    })
+
+    return "Review form is displayed."
+}
+
 function init() {
-    const stall = document.getElementById("specific-stall")
-    stall.setAttribute("hidden", "");
+    $('#specific-stall').hide()
 
     // Load review data
     loadData()
@@ -184,6 +263,17 @@ function init() {
                 console.log(error)
             })
     });
+
+    // Set up write review
+    document.getElementById("specific-stall-review-button").addEventListener('click', () => {
+        writeReview()
+            .then((data) => {
+                console.log(data)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    })
 }
 
 init()

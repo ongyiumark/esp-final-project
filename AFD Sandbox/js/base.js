@@ -166,6 +166,117 @@ function updateStallCards() {
     createStallCards(filteredStallList)
 }
 
+async function addFoodToggle() {
+    let SESSION_KEY = localStorage.getItem("SESSION_KEY")
+    let user
+    if (SESSION_KEY != null) {
+        try {
+            user = await getData(`${BASE_URL}user/session`, {'sessionKey': SESSION_KEY})
+        }
+        catch(error) {
+            console.log(error)
+        }
+    }
+    if (!user) {
+        signin()
+        closeModal()
+        throw new Error("Sign in required.")
+    }
+    return "Add food form is displayed."
+}
+
+function cancelAddFood() {
+    let inputName = document.getElementById("input-food-name")
+    let inputPrice = document.getElementById("input-food-price")
+    inputName.value = ""
+    inputPrice.value = ""
+    $("#add-food-container").hide()
+}
+
+async function saveFood() {
+    let SESSION_KEY = localStorage.getItem("SESSION_KEY")
+    let user
+    if (SESSION_KEY != null) {
+        try {
+            user = await getData(`${BASE_URL}user/session`, {'sessionKey': SESSION_KEY})
+        }
+        catch(error) {
+            console.log(error)
+        }
+    }
+    if (!user) {
+        signin()
+        closeModal()
+        throw new Error("Sign in required.")
+    }
+
+    let inputName = document.getElementById("input-food-name")
+    let inputPrice = document.getElementById("input-food-price")
+    let stallName = document.getElementById("stall-modal--name").textContent
+
+    // input validation
+    let responseDiv = document.getElementById("add-food-response")
+    if (inputName.value.trim().length == 0) {
+        responseDiv.textContent = "Please provide an food name."
+        throw new Error("Item name was not provided.")
+    }
+
+    if (inputPrice.value.trim().length == 0) {
+        responseDiv.textContent = "Please provide a price."
+        throw new Error("Price was not provided.")
+    }
+
+    if (!isNumeric(inputPrice.value.trim())) {
+        responseDiv.textContent = "Invalid price."
+        throw new Error("Provided price was invalid.")
+    }
+
+    let priceVal = parseFloat(inputPrice.value.trim())
+    if (priceVal < 0 || !isFinite(priceVal)) {
+        responseDiv.textContent = "Invalid price."
+        throw new Error("Provided price was invalid.")
+    }
+
+
+    let itemData = {
+        "stallName": stallName,
+        "itemName": inputName.value,
+        "price": priceVal
+    }
+
+    let itemRes
+    try{
+        itemRes = await postData(`${BASE_URL}food/new`, itemData)
+        // update stall data
+        allStallData = allStallData.map((stall) => {
+            if (stall.stallName == stallName) {
+                stall['items'].push({
+                    "itemName": itemRes.itemName,
+                    "price": itemRes.price
+                })
+            }
+            return stall
+        })
+
+        // update menu
+        updateStallCards()
+        modalMenu = document.getElementById("menu-list")
+        modalMenu.value += `${itemRes.itemName} - ₱${itemRes.price}\n`
+
+        // clear form
+        let inputName = document.getElementById("input-food-name")
+        let inputPrice = document.getElementById("input-food-price")
+        inputName.value = ""
+        inputPrice.value = ""
+        responseDiv.textContent = ""
+    }
+    catch(error) {
+        throw error
+    }
+    
+    return itemRes
+}
+
 function init() {
     // Load stall data
     loadData()
@@ -181,7 +292,32 @@ function init() {
         .catch((error) => {
             console.log(error.message)
         })
+
+    // Add food item button
+    let addButton = document.getElementById("add-food-button")
+    addButton.addEventListener("click", () => {
+        addFoodToggle()
+            .then((data) => {
+                console.log(data)
+                $("#add-food-container").show()
+            })
+            .catch((error) => console.log(error.message))
+    })
+
+    // Cancel button
+    let cancelButton = document.getElementById("add-food-cancel")
+    cancelButton.addEventListener("click", cancelAddFood, false)
+
+
+    // Save button
+    let saveButton = document.getElementById("add-food-save")
+    saveButton.addEventListener("click", () => {
+        saveFood()
+            .then((data) => {
+                console.log(data)
+            })
+            .catch((error) => console.log(error.message))
+    })
 }
 
 init()
-//createStallCards(stallList)

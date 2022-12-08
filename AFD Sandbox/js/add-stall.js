@@ -62,7 +62,6 @@ async function addStall() {
     }
 
 
-    
     let stallRes = await postData(`${BASE_URL}stall/new`, stall)
     return stallRes
 }

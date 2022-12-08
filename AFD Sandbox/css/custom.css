@@ -295,3 +295,7 @@ option{
 #welcome-login-register:hover .user-dropdown {
     display: block;
 }
+
+#add-food-response {
+    padding-top: 10px;
+}

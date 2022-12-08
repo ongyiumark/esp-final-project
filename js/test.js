@@ -46,6 +46,7 @@ function addDataRow() {
 // Display to output
 function parseResponse(res) {
     let output = document.getElementById("output-text");
+
     if ((typeof res) == 'string') output.innerText = res;
     else output.innerText = JSON.stringify(res, null, 2);
 }
@@ -101,6 +102,8 @@ function loadPresets() {
                     dataVal.value = preset['data'][key];
                     i += 1;
                 }
+
+                document.getElementById("request-method").textContent = `(${preset['type']})`
             }
         } 
     }); 
@@ -136,6 +139,23 @@ function init() {
         // Display URL
         document.getElementById("output-url").innerText = `URL: ${url}?${new URLSearchParams(data)}`;
         
+        if (grabURL() == "image/show") {
+            let get_url = `${url}?${new URLSearchParams(data)}`;
+
+            fetch(get_url)
+                .then(response => response.blob())
+                .then(imageBlob => {
+                    const imageObjectURL = URL.createObjectURL(imageBlob);
+                    let img = document.createElement("img")
+                    img.setAttribute("width", "80%")
+                    img.src = imageObjectURL
+                    let output = document.getElementById("output-text")
+                    output.innerHTML = ""
+                    output.appendChild(img)
+                })
+            return
+        }
+
         // Display response
         getData(url, data)
             .then((data) => {

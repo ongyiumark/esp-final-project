@@ -29,10 +29,10 @@ function updateNav() {
 }
 
 async function registerUser() {
-    usernameInput = document.getElementById("register-username")
-    passwordInput = document.getElementById("register-password")
-    confirmPasswordInput = document.getElementById("register-confirm-password")
-    responseDiv = document.getElementById("register-response")
+    let usernameInput = document.getElementById("register-username")
+    let passwordInput = document.getElementById("register-password")
+    let confirmPasswordInput = document.getElementById("register-confirm-password")
+    let responseDiv = document.getElementById("register-response")
 
     if (usernameInput.value.trim().length == 0) {
         responseDiv.textContent = "Please provide a username."
@@ -123,14 +123,6 @@ function register(){
     $('#register').modal('show')
 }
 
-function writeReview() {
-    $('#write-review').modal('show')
-    for (let i=1; i<=5; i++) {
-        $('#write-review-star-'+i).addClass("inactive-star")
-        $('#write-review-star-'+i).removeClass("active-star")
-    }
-}
-
 var starsSelected
 
 function clickStar(n) {
@@ -145,17 +137,14 @@ function clickStar(n) {
     starsSelected = n
 }
 
-function submitReview() {
-    if (!starsSelected) {
-        console.log("invalid")
-        return
-    }
-    console.log(starsSelected)
-}
-
 // Stall Modal
 function stallmodal(){
     $('#stallmodal').modal('show');
+    let inputName = document.getElementById("input-food-name")
+    let inputPrice = document.getElementById("input-food-price")
+    inputName.value = ""
+    inputPrice.value = ""
+    $("#add-food-container").hide()
 }
 
 function closeModal(){

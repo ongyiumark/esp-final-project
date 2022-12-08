@@ -11,7 +11,7 @@ async function addStall() {
     }
     if (!user) {
         signin()
-        throw "Sign in required."
+        throw new Error("Sign in required.")
     }
 
     let saveResponse = document.getElementById('save-response')
@@ -44,7 +44,6 @@ async function addStall() {
     if (image) {
         let imageRes = await postDataMultiform(`${BASE_URL}image/upload`, {'file' : image});
         stall['imageName'] = imageRes.fileName;
-        console.log("WHY")
         console.log(image)
     }
 
@@ -62,8 +61,19 @@ async function addStall() {
     }
 
 
-    
-    let stallRes = await postData(`${BASE_URL}stall/new`, stall)
+    let stallRes
+    try {
+        stallRes = await postData(`${BASE_URL}stall/new`, stall)
+    }
+    catch(error) {
+        throw error
+    }
+
+    saveResponse.textContent = "Food stall added successfully."
+    document.getElementById("sname").value = "";
+    document.getElementById("lname").value = "";
+    document.getElementById("description").value = "";
+
     return stallRes
 }
 
@@ -77,7 +87,6 @@ function init() {
         addStall()
             .then((msg) => {
                 console.log(msg)
-                alert("Food stall added successfully.")
             })
             .catch((error) => console.log(error));
     })

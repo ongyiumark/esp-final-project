@@ -77,14 +77,15 @@
 #specific-stall-details {
     color: white;
     font-weight: bold;
+    width: 50%;
 }
 
 #specific-stall-name {
-    font-size: 48px;
+    font-size: 2.7vw;
 }
 
 #specific-stall-ratings {
-    font-size: 24px;
+    font-size: 1.5vw;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -92,15 +93,20 @@
 }
 
 #specific-stall-location {
-    font-size: 24px;
+    font-size: 1.5vw;
 }
 
 #specific-stall-description {
-    font-size: 24px;
+    font-size: 1.5vw;
+    overflow-wrap: anywhere;
+}
+
+#specific-stall-review-button {
+    width: 50%;
 }
 
 #specific-stall-review-button > a {
-    font-size: 32px;
+    font-size: 2vw;
     background-color: #1B065E;
     border-radius: 15px;
     padding: 1em 1.5em;

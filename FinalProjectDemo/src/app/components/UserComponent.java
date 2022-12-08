@@ -80,6 +80,53 @@ public class UserComponent {
 		return user;
 	}
 	
+	public User update(
+			String oldUserName, 
+			String oldPassword, 
+			String userName, 
+			String password) {
+		// Check if user already exists
+		User user = userRepo.findByUserName(userName);
+		if (user != null) {
+			throw new RuntimeException(
+				String.format("Username '%s' already exists.", userName)
+			);
+		}
+		
+		// Check if password is empty
+		if (password.isEmpty()) {
+			throw new RuntimeException("Please input a password");
+		}
+		
+		// Encrypt password 
+		String encryptedPassword;
+		try {
+			encryptedPassword = SHA256Hash(password);
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException("Incorrect algorithm: " + e);
+		}
+		
+		String oldEncryptedPassword;
+		try {
+			oldEncryptedPassword = SHA256Hash(oldPassword);
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException("Incorrect algorithm: " + e);
+		}
+		
+		
+		user = userRepo.findByUserNameAndPassword(oldUserName, oldEncryptedPassword);
+		if (user == null) {
+			throw new RuntimeException("Invalid credentials.");
+		}
+		user.setNumReviews(0);
+		user.setUserName(userName);
+		user.setPassword(encryptedPassword);
+		
+		// Update database
+		user = userRepo.save(user);
+		return user;
+	}
+	
 	public Session login(String userName, String password) {
 		if (sessionRepo.count() > 0) {
 			throw new RuntimeException("A user is already logged in.");

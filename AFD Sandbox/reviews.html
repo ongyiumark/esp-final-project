@@ -21,7 +21,7 @@
         <script src="js/jquery-3.4.1.slim.min.js"></script> 
         <script src="js/helper.js"></script>
         <script src="js/custom.js" defer></script>
-        <script src="js/reviewPopulate.js" defer></script>
+        <script src="js/review.js" defer></script>
     </head>
     <body>
         <!-- Sign in Modal -->
@@ -41,27 +41,52 @@
                   </div>
               </div>
             </div>
-          </div>
+        </div>
       
-          <!-- Register Modal -->
-          <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                      <div class="row text-center login-header">Register Form</div>
-                      <div class="row acc-button">
-                          <div class="signin2" onclick="signin()">Sign in</div>
-                          <div class="register2">Register</div>
-                      </div>
-                      <div class="row">
-                          <input type="text" placeholder="Username" class="form-control br-10 acc-input" id="register-username">
-                          <input type="text" placeholder="Password" class="form-control br-10 acc-input" id="register-password">
-                          <input type="text" placeholder="Confirm Password" class="form-control br-10 acc-input" id="register-confirm-password">
-                          <div id="register-response" class="warning"></div>
-                          <button class="button submit" type="button" id="register-button">Register</button>
-                      </div>
-                  </div>
-              </div>
-          </div>
+        <!-- Register Modal -->
+        <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="row text-center login-header">Register Form</div>
+                    <div class="row acc-button">
+                        <div class="signin2" onclick="signin()">Sign in</div>
+                        <div class="register2">Register</div>
+                    </div>
+                    <div class="row">
+                        <input type="text" placeholder="Username" class="form-control br-10 acc-input" id="register-username">
+                        <input type="text" placeholder="Password" class="form-control br-10 acc-input" id="register-password">
+                        <input type="text" placeholder="Confirm Password" class="form-control br-10 acc-input" id="register-confirm-password">
+                        <div id="register-response" class="warning"></div>
+                        <button class="button submit" type="button" id="register-button">Register</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Review Modal -->
+        <div class="modal fade" id="write-review" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="row login-header">Give Feedback</div>
+                    <div class="row">How would you rate this stall?</div>
+                    <div class="row" id="row-star-cont">
+                        <img src="images/star-solid.svg" id="write-review-star-1" class="inactive-star" onclick="clickStar(1)" alt="">
+                        <img src="images/star-solid.svg" id="write-review-star-2" class="inactive-star" onclick="clickStar(2)" alt="">
+                        <img src="images/star-solid.svg" id="write-review-star-3" class="inactive-star" onclick="clickStar(3)" alt="">
+                        <img src="images/star-solid.svg" id="write-review-star-4" class="inactive-star" onclick="clickStar(4)" alt="">
+                        <img src="images/star-solid.svg" id="write-review-star-5" class="inactive-star" onclick="clickStar(5)" alt="">
+                    </div>
+                    <div class="row" style="font-weight: bold;">
+                        Write your review
+                    </div>
+                    <div class="row">
+                        <textarea name="review-ta" id="review-ta" cols="20" rows="10" placeholder="How is your overall experience?"></textarea>
+                        <div id="review-response" class="warning"></div>
+                        <button class="button submit" type="button" id="submit-review-button">Submit Review</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- MAIN SCREEN -->
         <div class="headerImage-shortened" style="background-image: url('images/headerImage.jpg');">
@@ -89,71 +114,11 @@
             <div class="row mt-2">
                 <input type="text" placeholder="Search..." class="form-control br-5 input-group" id = "search-input">
                 <select class="form-select br-5 form-reviews" aria-label="Default select example" id="search-select">
-                    <option disabled selected value = "none">Choose Type</option>
-                    <option value="stall">Stall</option>
+                    <!--<option disabled selected value = "none">Choose Type</option>-->
+                    <option value="stall" selected>Stall</option>
                     <option value="user">User</option>
                 </select>
                 <button class="reviews-button br-5" type="button" id="search-btn">Search</button>
-            </div>
-
-            <!-- Sign in Modal -->
-            <div class="modal fade" id="signin" tabindex="-1" role="dialog" aria-hidden="true">
-              <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="row text-center login-header">Login Form</div>
-                    <div class="row acc-button">
-                        <div class="signin">Sign in</div>
-                        <div class="register" onclick="register()">Register</div>
-                    </div>
-                    <div class="row">
-                        <input type="text" placeholder="Username" class="form-control br-10 acc-input">
-                        <input type="password" placeholder="Password" class="form-control br-10 acc-input">
-                        <button class="button submit" type="button">Login</button>
-                    </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Register Modal -->
-            <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="row text-center login-header">Login Form</div>
-                        <div class="row acc-button">
-                            <div class="signin2" onclick="signin()">Sign in</div>
-                            <div class="register2">Register</div>
-                        </div>
-                        <div class="row">
-                            <input type="text" placeholder="Username" class="form-control br-10 acc-input">
-                            <input type="text" placeholder="Password" class="form-control br-10 acc-input">
-                            <input type="text" placeholder="Confirm Password" class="form-control br-10 acc-input">
-                            <button class="button submit" type="button">Register</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal fade" id="write-review" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="row login-header">Give Feedback</div>
-                        <div class="row">How would you rate this stall?</div>
-                        <div class="row" id="row-star-cont">
-                            <img src="images/star-solid.svg" id="write-review-star-1" class="inactive-star" onclick="clickStar(1)" alt="">
-                            <img src="images/star-solid.svg" id="write-review-star-2" class="inactive-star" onclick="clickStar(2)" alt="">
-                            <img src="images/star-solid.svg" id="write-review-star-3" class="inactive-star" onclick="clickStar(3)" alt="">
-                            <img src="images/star-solid.svg" id="write-review-star-4" class="inactive-star" onclick="clickStar(4)" alt="">
-                            <img src="images/star-solid.svg" id="write-review-star-5" class="inactive-star" onclick="clickStar(5)" alt="">
-                        </div>
-                        <div class="row" style="font-weight: bold;">
-                            Write your review
-                        </div>
-                        <div class="row">
-                            <textarea name="review-ta" id="review-ta" cols="20" rows="10" placeholder="How is your overall experience?"></textarea>
-                            <button class="button submit" onclick="submitReview()" type="button">Submit Review</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -175,7 +140,7 @@
                 </div>
             </div>
             <div id="specific-stall-review-button">
-                <a href="#" onclick="writeReview()">Write a Review</a>
+                <a href="#">Write a Review</a>
             </div>
         </div>
 

@@ -69,3 +69,9 @@ async function postDataMultiform(url='', data={}) {
 
     throw await response.json()
 }
+
+// Helper function to check if string is a number
+function isNumeric(str) {
+    if (typeof str != "string") return false
+    return !isNaN(str) && !isNaN(parseFloat(str))
+}

@@ -102,6 +102,8 @@ function loadPresets() {
                     dataVal.value = preset['data'][key];
                     i += 1;
                 }
+
+                document.getElementById("request-method").textContent = `(${preset['type']})`
             }
         } 
     }); 

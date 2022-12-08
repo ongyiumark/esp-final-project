@@ -148,5 +148,21 @@ let presets =
             "fileName": "stall--blue-alley.png"
         },
         "type": "GET"
+    },
+    {
+        "name": "Add new image filename",
+        "url": "image/new",
+        "data": {
+            "fileName": "stall--test.png"
+        },
+        "type": "POST"
+    },
+    {
+        "name": "Upload new image",
+        "url": "image/upload",
+        "data": {
+
+        },
+        "type": "POST"
     }
 ]

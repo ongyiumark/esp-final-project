@@ -139,6 +139,86 @@ const stallSeeder = [
             },
         ]
     },
+    {
+        "stallName": "Glory's Ilocos Empanada",
+        "description": "A taste of Ilocos",
+        "locationName": "Gonzaga Cafeteria",
+        "imageName": "stall--glorys.jpg",
+        "items": [
+            {
+                "itemName": "Buy 1 Take 1",
+                "price": 100
+            },
+            {
+                "itemName": "Special Empanada",
+                "price": 60
+            },
+            {
+                "itemName": "Beef Tapa Empanada",
+                "price": 60
+            },
+            {
+                "itemName": "Chicken Inasal Empanada",
+                "price": 60
+            },
+            {
+                "itemName": "Bagnet Empanada",
+                "price": 60
+            },
+            {
+                "itemName": "New Spicy Empanada",
+                "price": 60
+            }
+        ]
+    },
+    {
+        "stallName": "Ebai's Pitstop",
+        "description": "Ebai's Cafe and Pastry is a restaurant specializing in Filipino foods",
+        "locationName": "Ateneo College Covered Courts",
+        "imageName": "stall--ebais.jpg",
+        "items": [
+            {
+                "itemName": "Rice w/ Vegetables",
+                "price": 68
+            },
+            {
+                "itemName": "Rice w/ Chicken/Pork/Fish/Beef",
+                "price": 93
+            },
+            {
+                "itemName": "Rice w/ Chicken/Pork/Fish/Beef and Vegetable (side dish)",
+                "price": 121
+            },
+            {
+                "itemName": "One serve Vegetable",
+                "price": 55
+            },
+            {
+                "itemName": "One serve chicken/pork/fish",
+                "price": 80
+            },
+            {
+                "itemName": "One serve beef/shrimp",
+                "price": 85
+            },
+            {
+                "itemName": "One serve inihaw",
+                "price": 80
+            },
+            {
+                "itemName": "One serve liempo (Garlic Salt & Pepper Marinated)",
+                "price": 80
+            },
+            {
+                "itemName": "Chicken - Whole leg Barbeque",
+                "price": 128
+            },
+            {
+                "itemName": "Chicken - Whole leg Inasal",
+                "price": 128
+            }
+        ]
+    }
     // Follow the format above and make sure to put the image in FinalProjectDemo/images
 ];
 

@@ -33,6 +33,18 @@ public class UserController {
 	}
 	
 	@POST
+	@Path("/update")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.APPLICATION_JSON)
+	public User update(
+			@FormParam("oldUserName") String oldUserName,
+			@FormParam("oldPassword") String oldPassword,
+			@FormParam("userName") String userName, 
+			@FormParam("password") String password) {
+		return uc.update(oldUserName, oldPassword, userName, password);
+	}
+	
+	@POST
 	@Path("/login")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)

@@ -156,13 +156,5 @@ let presets =
             "fileName": "stall--test.png"
         },
         "type": "POST"
-    },
-    {
-        "name": "Upload new image",
-        "url": "image/upload",
-        "data": {
-
-        },
-        "type": "POST"
     }
 ]

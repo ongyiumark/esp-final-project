@@ -5,23 +5,25 @@ async function populateDatabase() {
     let imageData = await getData(`${BASE_URL}image/list`)
     let userData = await getData(`${BASE_URL}user/list`)
     let reviewData = await getData(`${BASE_URL}review/list`)
+    let output = document.getElementById("output")
 
     // Abort if database is not empty
-    if (locationData.length) return "Location table is not empty. Database population aborted."
-    if (stallData.length) return "Food stall table is not empty. Database population aborted."
-    if (itemData.length) return "Food item table is not empty. Database population aborted."
-    if (imageData.length) return "Image table is not empty. Database population aborted."
-    if (userData.length) return "User table is not empty. Database population aborted."
-    if (reviewData.length) return "Food Stall table is not empty. Database population aborted."
+    if (locationData.length) throw new Error("Location table is not empty. Database population aborted.")
+    if (stallData.length) throw new Error("Food stall table is not empty. Database population aborted.")
+    if (itemData.length) throw new Error("Food item table is not empty. Database population aborted.")
+    if (imageData.length) throw new Error("Image table is not empty. Database population aborted.")
+    if (userData.length) throw new Error("User table is not empty. Database population aborted.")
+    if (reviewData.length) throw new Error("Food Stall table is not empty. Database population aborted.")
 
     // Populate location
     for (let location of locationSeeder) {
         try {
             let res = await postData(`${BASE_URL}location/new`, location)
             console.log(`The location '${res.locationName}' was added.`)
+            output.innerHTML += `The location '${res.locationName}' was added.<br>`
         }
         catch(err) {
-            return `Something went wrong while trying to add the location '${location.locationName}'. Database population aborted.`
+            throw new Error(`Something went wrong while trying to add the location '${location.locationName}'. Database population aborted.`)
         }
     }
 
@@ -31,9 +33,10 @@ async function populateDatabase() {
         try {
             let img = await postData(`${BASE_URL}image/new`, {'fileName': stall.imageName})
             console.log(`The image '${img.fileName}' was added.`)
+            output.innerHTML += `The image '${img.fileName}' was added.<br>`
         }
         catch(err) {
-            return `Something went wrong while trying to add the image '${stall.imageName}'. Database population aborted.`
+            throw new Error(`Something went wrong while trying to add the image '${stall.imageName}'. Database population aborted.`)
         }
     }
 
@@ -63,9 +66,10 @@ async function populateDatabase() {
         try {
             stall = await postData(`${BASE_URL}stall/new`, stall)
             console.log(`The food stall '${stall.stallName}' was added.`)
+            output.innerHTML += `The food stall '${stall.stallName}' was added.<br>`
         }
         catch(err) {
-            return `Something went wrong while trying to add the food stall '${stall.stallName}'. Database population aborted.`
+            throw new Error (`Something went wrong while trying to add the food stall '${stall.stallName}'. Database population aborted.`)
         }
     }
 
@@ -77,9 +81,10 @@ async function populateDatabase() {
                 item['stallName'] = stall.stallName;
                 item = await postData(`${BASE_URL}food/new`, item)
                 console.log(`The food item '${item.itemName}' from '${stall.stallName}' was added.`)
+                output.innerHTML += `The food item '${item.itemName}' from '${stall.stallName}' was added.<br>`
             }
             catch(err) {
-                return `Something went wrong while trying to add the food item '${item.itemName}' from '${stall.stallName}'. Database population aborted.`
+                throw new Error(`Something went wrong while trying to add the food item '${item.itemName}' from '${stall.stallName}'. Database population aborted.`)
             }
         }
     }
@@ -89,9 +94,10 @@ async function populateDatabase() {
         try {
             user = await postData(`${BASE_URL}user/register`, user)
             console.log(`The user '${user.userName}' was added.`)
+            output.innerHTML += `The user '${user.userName}' was added.<br>`
         }
         catch(err) {
-            return `Something went wrong while trying to add the user '${user.userName}'. Database population aborted.`
+            throw new Error(`Something went wrong while trying to add the user '${user.userName}'. Database population aborted.`)
         }
     }
 
@@ -102,10 +108,11 @@ async function populateDatabase() {
             let userName = review.userName;
             review = await postData(`${BASE_URL}review/new`, review)
             console.log(`A review of '${stallName}' by '${userName}' was added.`)
+            output.innerHTML += `A review of '${stallName}' by '${userName}' was added.<br>`
         }
         catch(err) {
             console.log(err.message)
-            return `Something went wrong while trying to add a review of '${review.stallName}' by '${review.userName}'. Database population aborted.`
+            throw new Error(`Something went wrong while trying to add a review of '${review.stallName}' by '${review.userName}'. Database population aborted.`)
         }
     }
 
@@ -114,10 +121,16 @@ async function populateDatabase() {
 
 function init() {
     // Set up populate button
-    document.getElementById("populate-btn").addEventListener("click", () => {
+    document.getElementById("populate-container").addEventListener("click", () => {
         populateDatabase()
-            .then((msg) => console.log(msg))
-            .catch((error) => console.log(error.message))
+            .then((msg) => {
+                console.log(msg)
+                document.getElementById("output").innerHTML += msg;
+            })
+            .catch((error) => {
+                console.log(error.message)
+                document.getElementById("output").innerHTML = error.message + "<br>Note that database population will only be attempted if the database is empty.<br>This is to prevent double entries.";
+            })
     }, false);
 }
 

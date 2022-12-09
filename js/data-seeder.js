@@ -182,23 +182,43 @@ const stallSeeder = [
                 "price": 68
             },
             {
-                "itemName": "Rice w/ Chicken/Pork/Fish/Beef",
+                "itemName": "Rice w/ Chicken",
                 "price": 93
             },
             {
-                "itemName": "Rice w/ Chicken/Pork/Fish/Beef and Vegetable (side dish)",
-                "price": 121
+                "itemName": "Rice w/ Pork",
+                "price": 93
+            },
+            {
+                "itemName": "Rice w/ Fish",
+                "price": 93
+            },
+            {
+                "itemName": "Rice w/ Beef",
+                "price": 93
             },
             {
                 "itemName": "One serve Vegetable",
                 "price": 55
             },
             {
-                "itemName": "One serve chicken/pork/fish",
+                "itemName": "One serve chicken",
                 "price": 80
             },
             {
-                "itemName": "One serve beef/shrimp",
+                "itemName": "One serve pork",
+                "price": 80
+            },
+            {
+                "itemName": "One serve fish",
+                "price": 80
+            },
+            {
+                "itemName": "One serve beef",
+                "price": 85
+            },
+            {
+                "itemName": "One serve shrimp",
                 "price": 85
             },
             {
@@ -206,15 +226,15 @@ const stallSeeder = [
                 "price": 80
             },
             {
-                "itemName": "One serve liempo (Garlic Salt & Pepper Marinated)",
+                "itemName": "One serve liempo",
                 "price": 80
             },
             {
-                "itemName": "Chicken - Whole leg Barbeque",
+                "itemName": "Chicken Barbeque",
                 "price": 128
             },
             {
-                "itemName": "Chicken - Whole leg Inasal",
+                "itemName": "Chicken Inasal",
                 "price": 128
             }
         ]

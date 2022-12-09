@@ -27,19 +27,21 @@
         <!-- Sign in Modal -->
         <div class="modal fade" id="signin" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                  <div class="row text-center login-header">Login Form</div>
-                  <div class="row acc-button">
-                      <div class="signin">Sign in</div>
-                      <div class="register" onclick="register()">Register</div>
-                  </div>
-                  <div class="row">
-                      <input type="text" placeholder="Username" class="form-control br-10 acc-input" id="login-username">
-                      <input type="password" placeholder="Password" class="form-control br-10 acc-input" id="login-password">
-                      <div id="login-response" class="warning"></div>
-                      <button class="button submit" type="button" id="login-button">Login</button>
-                  </div>
-              </div>
+                <div class="modal-content">
+                    <div class="row text-center login-header">Login Form</div>
+                    <div class="row acc-button">
+                        <div class="signin">Sign in</div>
+                        <div class="register" onclick="register()">Register</div>
+                    </div>
+                    <div class="row">
+                        <input type="text" placeholder="Username" class="form-control br-10 acc-input" id="login-username">
+                    </div>
+                    <div class="row">
+                        <input type="password" placeholder="Password" class="form-control br-10 acc-input" id="login-password">
+                        <div id="login-response" class="warning"></div>
+                        <button class="button submit" type="button" id="login-button">Login</button>
+                    </div>
+                </div>
             </div>
         </div>
       
@@ -54,7 +56,11 @@
                     </div>
                     <div class="row">
                         <input type="text" placeholder="Username" class="form-control br-10 acc-input" id="register-username">
+                    </div>
+                    <div class="row">
                         <input type="text" placeholder="Password" class="form-control br-10 acc-input" id="register-password">
+                    </div>
+                    <div class="row">
                         <input type="text" placeholder="Confirm Password" class="form-control br-10 acc-input" id="register-confirm-password">
                         <div id="register-response" class="warning"></div>
                         <button class="button submit" type="button" id="register-button">Register</button>

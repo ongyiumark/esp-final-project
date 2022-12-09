@@ -5,6 +5,8 @@ public class ReviewDto {
 	private Long stallId;
 	private Integer rating;
 	private String reviewBody;
+	private String userName;
+	private String stallName;
 	private String errorMessage;
 
 	public Long getUserId() {
@@ -47,11 +49,30 @@ public class ReviewDto {
 		this.errorMessage = errorMessage;
 	}
 
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getStallName() {
+		return stallName;
+	}
+
+	public void setStallName(String stallName) {
+		this.stallName = stallName;
+	}
+
 	@Override
 	public String toString() {
 		return "ReviewDto [userId=" + userId + ", stallId=" + stallId + ", rating=" + rating + ", reviewBody="
-				+ reviewBody + ", errorMessage=" + errorMessage + "]";
+				+ reviewBody + ", userName=" + userName + ", stallName=" + stallName + ", errorMessage=" + errorMessage
+				+ "]";
 	}
+
+	
 
 	
 }

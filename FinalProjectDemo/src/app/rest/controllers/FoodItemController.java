@@ -41,10 +41,11 @@ public class FoodItemController {
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
 	public FoodItem addNewFoodItem(
+			@FormParam("sessionKey") String sessionKey,
 			@FormParam("stallName") String stallName, 
 			@FormParam("itemName") String itemName, 
 			@FormParam("price") Double price) {
 		
-		return fic.addNewFoodItem(stallName, itemName, price);
+		return fic.addNewFoodItem(sessionKey, stallName, itemName, price);
 	}
 }

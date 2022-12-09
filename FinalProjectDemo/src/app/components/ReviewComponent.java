@@ -3,6 +3,7 @@ package app.components;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -11,11 +12,14 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import app.dto.ReviewDto;
 import app.entity.FoodStall;
 import app.entity.Review;
+import app.entity.Session;
 import app.entity.User;
 import app.repository.FoodStallRepository;
 import app.repository.ReviewRepository;
+import app.repository.SessionRepository;
 import app.repository.UserRepository;
 
 @Component
@@ -30,21 +34,31 @@ public class ReviewComponent {
 	@Autowired
 	FoodStallRepository stallRepo;
 	
+	@Autowired
+	private SessionRepository sessionRepo;
+	
 	@PostConstruct
 	public void init() {
 	}
 	
 	public Review addNewReview(
-			String userName, 
+			String sessionKey, 
 			String stallName, 
 			String reviewBody, 
 			Integer rating,
 			String reviewDate) throws ParseException {
-		// Find user corresponding to `userName`
-		User user = userRepo.findByUserName(userName);
+		Session session = sessionRepo.findBySessionKey(sessionKey);
+		if (session == null) {
+			throw new RuntimeException(
+				String.format("Invalid session key.")
+			);
+		}
+		
+		// Find user corresponding to `userId`
+		User user = userRepo.findByUserId(session.getUserId());
 		if (user == null) {
 			throw new RuntimeException(
-				String.format("User '%s' is not in the database.", userName)
+				String.format("There is no user with ID '%d' in the database.", session.getUserId())
 			);
 		}
 		
@@ -76,11 +90,25 @@ public class ReviewComponent {
 		return review;
 	}
 	
-	public List<Review> getAllReviews() {
-		return reviewRepo.findAll();
+	public List<ReviewDto> getAllReviews() {
+		List<Review> reviews = reviewRepo.findAll();
+		List<ReviewDto> reviewDtos = new ArrayList<ReviewDto>();
+		for (Review rev : reviews) {
+			ReviewDto revDto = new ReviewDto();
+			revDto.setRating(rev.getRating());
+			revDto.setReviewBody(rev.getReviewBody());
+			revDto.setStallId(rev.getStallId());
+			revDto.setUserId(rev.getUserId());
+			revDto.setUserName(userRepo.findByUserId(rev.getUserId()).getUserName());
+			revDto.setStallName(stallRepo.findByStallId(rev.getStallId()).getStallName());
+			
+			reviewDtos.add(revDto);
+		}
+		
+		return reviewDtos;
 	}
 	
-	public List<Review> getStallReviews(String stallName) {
+	public List<ReviewDto> getStallReviews(String stallName) {
 		// Find the food stall corresponding to `stallName`
 		FoodStall stall = stallRepo.findByStallName(stallName);
 		if (stall == null) {
@@ -89,7 +117,21 @@ public class ReviewComponent {
 			);
 		}
 		
-		return reviewRepo.findByStallId(stall.getStallId());
+		List<Review> reviews = reviewRepo.findByStallId(stall.getStallId());
+		List<ReviewDto> reviewDtos = new ArrayList<ReviewDto>();
+		
+		for (Review rev : reviews) {
+			ReviewDto revDto = new ReviewDto();
+			revDto.setRating(rev.getRating());
+			revDto.setReviewBody(rev.getReviewBody());
+			revDto.setStallId(rev.getStallId());
+			revDto.setUserId(rev.getUserId());
+			revDto.setUserName(userRepo.findByUserId(rev.getUserId()).getUserName());
+			revDto.setStallName(stallRepo.findByStallId(rev.getStallId()).getStallName());
+			
+			reviewDtos.add(revDto);
+		}
+		return reviewDtos;
 	}
 	
 }

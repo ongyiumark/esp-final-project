@@ -10,21 +10,25 @@ import org.springframework.stereotype.Component;
 import app.entity.FoodStall;
 import app.entity.Image;
 import app.entity.Location;
+import app.entity.Session;
 import app.repository.FoodStallRepository;
 import app.repository.ImageRepository;
 import app.repository.LocationRepository;
+import app.repository.SessionRepository;
 
 @Component
 public class FoodStallComponent {
 	@Autowired
-	FoodStallRepository stallRepo; 
+	private FoodStallRepository stallRepo; 
 	
 	@Autowired
-	LocationRepository locationRepo;  
+	private LocationRepository locationRepo;  
 	
 	@Autowired
-	ImageRepository imageRepo;
+	private ImageRepository imageRepo;
 	
+	@Autowired
+	private SessionRepository sessionRepo;
 
 	@PostConstruct
 	public void init() {
@@ -37,12 +41,19 @@ public class FoodStallComponent {
 	
 	
 	public FoodStall addNewFoodStall(
+			String sessionKey,
 			String stallName,
 			String description, 
 			String imageName,
 			String locationName, 
 			Double longitude, 
 			Double latitude) {
+		Session session = sessionRepo.findBySessionKey(sessionKey);
+		if (session == null) {
+			throw new RuntimeException(
+				String.format("Invalid session key.")
+			);
+		}
 		
 		// Find the location corresponding to `locationName`
 		Location loc = locationRepo.findByLocationName(locationName);

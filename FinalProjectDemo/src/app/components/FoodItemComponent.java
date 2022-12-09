@@ -10,8 +10,10 @@ import org.springframework.stereotype.Component;
 
 import app.entity.FoodItem;
 import app.entity.FoodStall;
+import app.entity.Session;
 import app.repository.FoodItemRepository;
 import app.repository.FoodStallRepository;
+import app.repository.SessionRepository;
 
 @Component
 public class FoodItemComponent {
@@ -21,6 +23,9 @@ public class FoodItemComponent {
 	
 	@Autowired
 	private FoodStallRepository stallRepo;
+	
+	@Autowired
+	private SessionRepository sessionRepo;
 	
 	@PostConstruct
 	public void init() {
@@ -43,7 +48,14 @@ public class FoodItemComponent {
 		return itemRepo.findByStallId(stall.getStallId());
 	}
 	
-	public FoodItem addNewFoodItem(String stallName, String itemName, Double price){
+	public FoodItem addNewFoodItem(String sessionKey, String stallName, String itemName, Double price){
+		Session session = sessionRepo.findBySessionKey(sessionKey);
+		if (session == null) {
+			throw new RuntimeException(
+				String.format("Invalid session key.")
+			);
+		}
+		
 		// Find the food stall corresponding to `stallName`
 		FoodStall stall = stallRepo.findByStallName(stallName);
 		if (stall == null) {

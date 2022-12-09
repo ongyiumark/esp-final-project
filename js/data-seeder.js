@@ -347,7 +347,7 @@ const stallSeeder = [
         "stallName": "Ate Rica's Bacsilog",
         "description": "The 1st and original BACSILOG",
         "locationName": "Gonzaga Cafeteria",
-        "imageName": "stall--AR-bacsilog",
+        "imageName": "stall--AR-bacsilog.jpg",
         "items": [
             {
                 "itemName": "Bacsilog",
@@ -487,6 +487,10 @@ const stallSeeder = [
 ];
 
 const userSeeder = [
+    {
+        "userName": "admin",
+        "password": "admin"
+    },
     {
         "userName": "deloconi",
         "password": "password"

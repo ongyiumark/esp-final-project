@@ -1,4 +1,6 @@
-async function updateUser(user) {
+async function updateUser() {
+    let SESSION_KEY = localStorage.getItem("SESSION_KEY")
+
     let userNameInput = document.getElementById("username")
     let currentPasswordInput = document.getElementById("current-pass")
     let newPasswordInput = document.getElementById("new-pass")
@@ -28,10 +30,10 @@ async function updateUser(user) {
     }
 
     changeData = {
-        'oldUserName': user.userName,
-        'oldPassword': currentPasswordInput.value,
-        'userName': userNameInput.value,
-        'password': newPasswordInput.value
+        'sessionKey': SESSION_KEY,
+        'currentPassword': currentPasswordInput.value,
+        'newUserName': userNameInput.value,
+        'newPassword': newPasswordInput.value
     }
 
     let userRes
@@ -69,7 +71,7 @@ async function init() {
     }
 
     document.getElementById("save-change-button").addEventListener("click", () => {
-        updateUser(user)
+        updateUser()
             .then((data) => {
                 console.log(data)
                 updateNav()

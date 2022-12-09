@@ -182,6 +182,11 @@ function init() {
         postData(url, data)
             .then((data) => {
                 parseResponse(data);
+                if (grabURL() == "user/login") {
+                    localStorage.setItem("SESSION_KEY", data.sessionKey);
+                    updatePresets()
+                    console.log(data.sessionKey)
+                }
             })
             .catch((error) => {
                 console.log(error.message)

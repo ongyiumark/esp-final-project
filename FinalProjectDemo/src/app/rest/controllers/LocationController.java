@@ -24,10 +24,12 @@ public class LocationController {
 	@Path("/new")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Location addNewLocation(@FormParam("locationName") String locationName,
+	public Location addNewLocation(
+							@FormParam("sessionKey") String sessionKey,
+							@FormParam("locationName") String locationName,
 							@FormParam("longitude") Double longitude,
 							@FormParam("latitude") Double latitude) {
-		return lc.addNewLocation(locationName, longitude, latitude);
+		return lc.addNewLocation(sessionKey, locationName, longitude, latitude);
 	}
 	
 	@GET

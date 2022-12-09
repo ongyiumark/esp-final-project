@@ -51,6 +51,7 @@ body {
 }
 
 #output {
+    margin-top: 20px;
     background-color: black;
     width: 60%;
     font: 0.9rem Inconsolata, monospace;

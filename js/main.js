@@ -15,10 +15,43 @@ async function populateDatabase() {
     if (userData.length) throw new Error("User table is not empty. Database population aborted.")
     if (reviewData.length) throw new Error("Food Stall table is not empty. Database population aborted.")
 
+    // Populate users
+    for (let user of userSeeder) {
+        try {
+            user = await postData(`${BASE_URL}user/register`, user)
+            console.log(`The user '${user.userName}' was added.`)
+            output.innerHTML += `The user '${user.userName}' was added.<br>`
+        }
+        catch(err) {
+            throw new Error(`Something went wrong while trying to add the user '${user.userName}'. Database population aborted.`)
+        }
+    }
+
+    // Login to admin user
+    let sessionKey
+    try {
+        let session = await postData(`${BASE_URL}user/login`, {
+            "userName": "admin",
+            "password": "admin"
+        })
+        sessionKey = session.sessionKey;
+
+        console.log(`Logged in to admin user.`)
+        output.innerHTML += `Logged in to admin user.<br>`
+    }
+    catch(err) {
+        console.log(err.message)
+        throw new Error("Something went wrong while trying to log in to the admin user.")
+    }
+
+
     // Populate location
     for (let location of locationSeeder) {
         try {
-            let res = await postData(`${BASE_URL}location/new`, location)
+            let res = await postData(`${BASE_URL}location/new`, {
+                "sessionKey": sessionKey,
+                ...location
+            })
             console.log(`The location '${res.locationName}' was added.`)
             output.innerHTML += `The location '${res.locationName}' was added.<br>`
         }
@@ -64,11 +97,15 @@ async function populateDatabase() {
 
     for (let stall of proccessedStallSeeder) {
         try {
-            stall = await postData(`${BASE_URL}stall/new`, stall)
+            stall = await postData(`${BASE_URL}stall/new`, {
+                "sessionKey": sessionKey,
+                ...stall
+            })
             console.log(`The food stall '${stall.stallName}' was added.`)
             output.innerHTML += `The food stall '${stall.stallName}' was added.<br>`
         }
         catch(err) {
+            console.log(err.message)
             throw new Error (`Something went wrong while trying to add the food stall '${stall.stallName}'. Database population aborted.`)
         }
     }
@@ -79,26 +116,27 @@ async function populateDatabase() {
         for (let item of stall.items) {
             try {
                 item['stallName'] = stall.stallName;
-                item = await postData(`${BASE_URL}food/new`, item)
+                item = await postData(`${BASE_URL}food/new`, {
+                    "sessionKey": sessionKey,
+                    ...item
+                })
                 console.log(`The food item '${item.itemName}' from '${stall.stallName}' was added.`)
                 output.innerHTML += `The food item '${item.itemName}' from '${stall.stallName}' was added.<br>`
             }
             catch(err) {
+                console.log(err.message)
                 throw new Error(`Something went wrong while trying to add the food item '${item.itemName}' from '${stall.stallName}'. Database population aborted.`)
             }
         }
     }
 
-    // Populate users
-    for (let user of userSeeder) {
-        try {
-            user = await postData(`${BASE_URL}user/register`, user)
-            console.log(`The user '${user.userName}' was added.`)
-            output.innerHTML += `The user '${user.userName}' was added.<br>`
-        }
-        catch(err) {
-            throw new Error(`Something went wrong while trying to add the user '${user.userName}'. Database population aborted.`)
-        }
+    // Logout admin
+    try {
+        await getData(`${BASE_URL}user/logout`, {"sessionKey" : sessionKey})
+    }
+    catch(err) {
+        console.log(err.message)
+        throw new Error(`Failed to log out admin user.`)
     }
 
     // Populate reviews
@@ -106,9 +144,41 @@ async function populateDatabase() {
         try {
             let stallName = review.stallName;
             let userName = review.userName;
-            review = await postData(`${BASE_URL}review/new`, review)
+
+            // Find password of userName
+            let user = userSeeder.filter((user) => user.userName == userName)
+            let password = user[0].password
+
+            // Log in user
+            let sessionKey
+            try {
+                let session = await postData(`${BASE_URL}user/login`, {
+                    "userName": userName,
+                    "password": password
+                })
+                sessionKey = session.sessionKey;
+            }
+            catch(err) {
+                console.log(err.message)
+                throw new Error(`Something went wrong while trying to log in with '${userName}'.`)
+            }
+            
+            // Add review
+            review = await postData(`${BASE_URL}review/new`, {
+                "sessionKey": sessionKey,
+                ...review
+            })
             console.log(`A review of '${stallName}' by '${userName}' was added.`)
             output.innerHTML += `A review of '${stallName}' by '${userName}' was added.<br>`
+
+            // Log out user
+            try {
+                await getData(`${BASE_URL}user/logout`, {"sessionKey" : sessionKey})
+            }
+            catch(err) {
+                console.log(err.message)
+                throw new Error(`Failed to log out '${userName}'.`)
+            }
         }
         catch(err) {
             console.log(err.message)
@@ -116,22 +186,37 @@ async function populateDatabase() {
         }
     }
 
+
+
+    
+
     return "Database successfully populated."
 }
 
 function init() {
-    // Set up populate button
-    document.getElementById("populate-container").addEventListener("click", () => {
-        populateDatabase()
-            .then((msg) => {
-                console.log(msg)
-                document.getElementById("output").innerHTML += msg;
-            })
-            .catch((error) => {
-                console.log(error.message)
-                document.getElementById("output").innerHTML = error.message + "<br>Note that database population will only be attempted if the database is empty.<br>This is to prevent double entries.";
-            })
-    }, false);
+    // // Set up populate button
+    // document.getElementById("populate-container").addEventListener("click", () => {
+    //     populateDatabase()
+    //         .then((msg) => {
+    //             console.log(msg)
+    //             document.getElementById("output").innerHTML += msg;
+    //         })
+    //         .catch((error) => {
+    //             console.log(error.message)
+    //             document.getElementById("output").innerHTML = error.message + "<br>Note that database population will only be attempted if the database is empty.<br>This is to prevent double entries.";
+    //         })
+    // }, false);
+
+    populateDatabase()
+        .then((msg) => {
+            console.log(msg)
+            document.getElementById("output").innerHTML += msg;
+        })
+        .catch((error) => {
+            console.log(error.message)
+            document.getElementById("output").innerHTML = error.message + "<br>Note that database population will only be attempted if the database is empty.<br>This is to prevent double entries.";
+        })
+
 }
 
 init();

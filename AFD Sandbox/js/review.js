@@ -4,27 +4,8 @@ let allReviews;
 const reviewContainer = document.getElementById("review-container")
 
 async function loadData() {
-    let stallData = await getData(`${BASE_URL}stall/list`)
-    let userData = await getData(`${BASE_URL}user/list`)
     let reviewData = await getData(`${BASE_URL}review/list`)
-
-    let reviewList = await Promise.all(reviewData.map(async (review) => {
-        for (let stall of stallData) {
-            if (stall.stallId == review.stallId) {
-                review['stallName'] = stall.stallName;
-            }
-        }
-
-        for (let user of userData) {
-            if (user.userId == review.userId) {
-                review['userName'] = user.userName;
-            }
-        }
-
-        return review
-    }))
-
-    return reviewList;
+    return reviewData;
 }
 
 async function updateReviews() {
@@ -156,6 +137,7 @@ function createReviews(revList) {
 }
 
 async function submitReview(reviewData) {
+    let SESSION_KEY = localStorage.getItem("SESSION_KEY")
     let reviewResponse = document.getElementById("review-response")
 
     if (!starsSelected) {
@@ -178,7 +160,10 @@ async function submitReview(reviewData) {
 
     let reviewRes
     try {
-        reviewRes = await postData(`${BASE_URL}review/new`, reviewData)
+        reviewRes = await postData(`${BASE_URL}review/new`, {
+            "sessionKey": SESSION_KEY,
+            ...reviewData
+        })
         allReviews = await loadData()
         updateReviews()
             .then((data) => createReviews(data))

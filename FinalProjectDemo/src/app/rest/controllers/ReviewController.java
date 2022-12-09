@@ -15,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import app.components.ReviewComponent;
+import app.dto.ReviewDto;
 import app.entity.Review;
 
 @Path("/review")
@@ -26,25 +27,26 @@ public class ReviewController {
 	@Path("/new")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Review addNewReview(@FormParam("userName") String userName,
+	public Review addNewReview(
+							@FormParam("sessionKey") String sessionKey,
 							@FormParam("stallName") String stallName,
 							@FormParam("reviewBody") String reviewBody,
 							@FormParam("rating") Integer rating,
 							@FormParam("reviewDate") String reviewDate) throws ParseException {
-		return rc.addNewReview(userName, stallName, reviewBody, rating, reviewDate);
+		return rc.addNewReview(sessionKey, stallName, reviewBody, rating, reviewDate);
 	}
 	
 	@GET
 	@Path("/list")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Review> getAllReviews() {
+	public List<ReviewDto> getAllReviews() {		
 		return rc.getAllReviews();
 	}
 	
 	@GET
 	@Path("/stall")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Review> getStallReviews(@QueryParam("stallName") String stallName) {
+	public List<ReviewDto> getStallReviews(@QueryParam("stallName") String stallName) {
 		return rc.getStallReviews(stallName);
 	}
 }

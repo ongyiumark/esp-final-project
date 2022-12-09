@@ -63,7 +63,10 @@ async function addStall() {
 
     let stallRes
     try {
-        stallRes = await postData(`${BASE_URL}stall/new`, stall)
+        stallRes = await postData(`${BASE_URL}stall/new`, {
+            "sessionKey": SESSION_KEY,
+            ...stall
+        })
     }
     catch(error) {
         throw error

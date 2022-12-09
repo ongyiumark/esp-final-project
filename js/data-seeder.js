@@ -238,6 +238,142 @@ const stallSeeder = [
                 "price": 128
             }
         ]
+    },
+    {
+        "stallName": "Itadakimasu",
+        "description": "Serving your Japanese favorites!",
+        "locationName": "Gonzaga Cafeteria",
+        "imageName": "stall--itadakimasu.jpg",
+        "items": [
+            {
+                "itemName": "Chicken Karaage",
+                "price": 120
+            },
+            {
+                "itemName": "Ebi Tempura",
+                "price": 150
+            },
+            {
+                "itemName": "Gyudon",
+                "price": 130
+            },
+            {
+                "itemName": "Charsiu Ramen",
+                "price": 160
+            },
+            {
+                "itemName": "Tonkatsu",
+                "price": 120
+            },
+            {
+                "itemName": "Katsudon",
+                "price": 145
+            },
+            {
+                "itemName": "Katsu Curry",
+                "price": 150
+            },
+            {
+                "itemName": "Tamago",
+                "price": 40
+            }
+        ]
+    },
+    {
+        "stallName": "Hunger Buster",
+        "description": "Burgers and Sandwiches",
+        "locationName": "Gonzaga Cafeteria",
+        "imageName": "stall--hunger-buster.jpg",
+        "items": [
+            {
+                "itemName": "[Burger] Dying",
+                "price": 120
+            },
+            {
+                "itemName": "[Burger] Starving",
+                "price": 100
+            },
+            {
+                "itemName": "[Burger] Burning",
+                "price": 120
+            },
+            {
+                "itemName": "[Burger] Flaming",
+                "price": 120
+            },
+            {
+                "itemName": "[Burger] Craving",
+                "price": 90
+            },
+            {
+                "itemName": "[Burger] Craving 2.0",
+                "price": 100
+            },
+            {
+                "itemName": "[Fries] Solo",
+                "price": 60
+            },
+            {
+                "itemName": "[Fries] Sharing",
+                "price": 100
+            },
+            {
+                "itemName": "[Wings] 1/3 Pound",
+                "price": 100
+            },
+            {
+                "itemName": "Texan BBQ Burger",
+                "price": 120
+            },
+            {
+                "itemName": "Bacon Two Cheese",
+                "price": 130
+            },
+            {
+                "itemName": "BLT Burger",
+                "price": 120
+            },
+            {
+                "itemName": "Rising Burger",
+                "price": 110
+            },
+            {
+                "itemName": "Extra Patty",
+                "price": 80
+            }
+        ]
+    },
+    {
+        "stallName": "Ate Rica's Bacsilog",
+        "description": "The 1st and original BACSILOG",
+        "locationName": "Gonzaga Cafeteria",
+        "imageName": "stall--AR-bacsilog",
+        "items": [
+            {
+                "itemName": "Bacsilog",
+                "price": 89
+            },
+            {
+                "itemName": "Hotsilog",
+                "price": 89
+            },
+            {
+                "itemName": "Footsilog",
+                "price": 89
+            },
+            {
+                "itemName": "Tapsilog",
+                "price": 109
+            },
+            {
+                "itemName": "Tocilog",
+                "price": 109
+            },
+            {
+                "itemName": "Nuggetsilog",
+                "price": 109
+            }
+        ]
     }
     // Follow the format above and make sure to put the image in FinalProjectDemo/images
 ];

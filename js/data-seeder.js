@@ -374,6 +374,114 @@ const stallSeeder = [
                 "price": 109
             }
         ]
+    },
+    {
+        "stallName": "Juzijuiz",
+        "description": "Juice makers since 2005, blending juices has been our passion.",
+        "locationName": "Gonzaga Cafeteria",
+        "imageName": "stall--juzijuiz.jpg",
+        "items": [
+            {
+                "itemName": "Melon Boomba",
+                "price": 40,
+            },
+            {
+                "itemName": "Coffee Boomba",
+                "price": 40,
+            },
+            {
+                "itemName": "Red Iced Tea",
+                "price": 40,
+            },
+            {
+                "itemName": "Mango Bango",
+                "price": 40,
+            },
+            {
+                "itemName": "Buko Fresh",
+                "price": 60,
+            }
+        ]
+    },
+    {
+        "stallName": "Needs",
+        "description": "A newly opened coffee shop in 2F of Gonzaga Cafeteria that features Brazil and Colombia blend coffee.",
+        "locationName": "Gonzaga Cafeteria",
+        "imageName": "stall--needs.jpg",
+        "items": [
+            {
+                "itemName": "Espresso",
+                "price": 80,
+            },
+            {
+                "itemName": "Latte",
+                "price": 100,
+            },
+            {
+                "itemName": "Cappuccino",
+                "price": 130,
+            },
+            {
+                "itemName": "Spanish Latte",
+                "price": 140,
+            },
+            {
+                "itemName": "Dirty Chai",
+                "price": 140,
+            },
+            {
+                "itemName": "Caramel Machiatto",
+                "price": 150,
+            },
+            {
+                "itemName": "Dark Mocha",
+                "price": 150,
+            }
+        ]
+    },
+    {
+        "stallName": "Chicksrule",
+        "description": "Serving tasty & addicting chicken poppers since 2009!",
+        "locationName": "Gonzaga Cafeteria",
+        "imageName": "stall--chicksrule.jpg",
+        "items": [
+            {
+                "itemName": "Chick n Pop",
+                "price": 105,
+            },
+            {
+                "itemName": "Chick n Fries",
+                "price": 130,
+            },
+            {
+                "itemName": "Chick n Mojos",
+                "price": 135,
+            },
+            {
+                "itemName": "Chick n Rice",
+                "price": 125,
+            },
+            {
+                "itemName": "French Fries",
+                "price": 70,
+            },
+            {
+                "itemName": "Fries and Mojos",
+                "price": 80,
+            },
+            {
+                "itemName": "Potato Platter",
+                "price": 100,
+            },
+            {
+                "itemName": "Takoyaki Chicken",
+                "price": 120,
+            },
+            {
+                "itemName": "Cheesy Mayo Chicken",
+                "price": 120,
+            }
+        ]
     }
     // Follow the format above and make sure to put the image in FinalProjectDemo/images
 ];

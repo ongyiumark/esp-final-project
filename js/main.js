@@ -194,18 +194,29 @@ async function populateDatabase() {
 }
 
 function init() {
-    // Set up populate button
-    document.getElementById("populate-container").addEventListener("click", () => {
-        populateDatabase()
-            .then((msg) => {
-                console.log(msg)
-                document.getElementById("output").innerHTML += msg;
-            })
-            .catch((error) => {
-                console.log(error.message)
-                document.getElementById("output").innerHTML = error.message + "<br>Note that database population will only be attempted if the database is empty.<br>This is to prevent double entries.";
-            })
-    }, false);
+    // // Set up populate button
+    // document.getElementById("populate-container").addEventListener("click", () => {
+    //     populateDatabase()
+    //         .then((msg) => {
+    //             console.log(msg)
+    //             document.getElementById("output").innerHTML += msg;
+    //         })
+    //         .catch((error) => {
+    //             console.log(error.message)
+    //             document.getElementById("output").innerHTML = error.message + "<br>Note that database population will only be attempted if the database is empty.<br>This is to prevent double entries.";
+    //         })
+    // }, false);
+
+    populateDatabase()
+        .then((msg) => {
+            console.log(msg)
+            document.getElementById("output").innerHTML += msg;
+        })
+        .catch((error) => {
+            console.log(error.message)
+            document.getElementById("output").innerHTML = error.message + "<br>Note that database population will only be attempted if the database is empty.<br>This is to prevent double entries.";
+        })
+
 }
 
 init();

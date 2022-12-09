@@ -77,6 +77,9 @@ public class UserComponent {
 		
 		// Update database
 		user = userRepo.save(user);
+		
+		user.setPassword("~redacted~");
+		user.setUserId(null);
 		return user;
 	}
 	
@@ -131,6 +134,8 @@ public class UserComponent {
 		
 		// Update database
 		user = userRepo.save(user);
+		user.setPassword("~redacted~");
+		user.setUserId(null);
 		return user;
 	}
 	

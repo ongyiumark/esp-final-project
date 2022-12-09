@@ -97,8 +97,6 @@ public class ReviewComponent {
 			ReviewDto revDto = new ReviewDto();
 			revDto.setRating(rev.getRating());
 			revDto.setReviewBody(rev.getReviewBody());
-			revDto.setStallId(rev.getStallId());
-			revDto.setUserId(rev.getUserId());
 			revDto.setUserName(userRepo.findByUserId(rev.getUserId()).getUserName());
 			revDto.setStallName(stallRepo.findByStallId(rev.getStallId()).getStallName());
 			
@@ -124,8 +122,6 @@ public class ReviewComponent {
 			ReviewDto revDto = new ReviewDto();
 			revDto.setRating(rev.getRating());
 			revDto.setReviewBody(rev.getReviewBody());
-			revDto.setStallId(rev.getStallId());
-			revDto.setUserId(rev.getUserId());
 			revDto.setUserName(userRepo.findByUserId(rev.getUserId()).getUserName());
 			revDto.setStallName(stallRepo.findByStallId(rev.getStallId()).getStallName());
 			

@@ -81,45 +81,52 @@ public class UserComponent {
 	}
 	
 	public User update(
-			String oldUserName, 
-			String oldPassword, 
-			String userName, 
-			String password) {
+			String sessionKey, 
+			String currentPassword, 
+			String newUserName, 
+			String newPassword) {
+		Session session = sessionRepo.findBySessionKey(sessionKey);
+		if (session == null) {
+			throw new RuntimeException(
+				String.format("Invalid session key.")
+			);
+		}
+		
 		// Check if user already exists
-		User user = userRepo.findByUserName(userName);
+		User user = userRepo.findByUserName(newUserName);
 		if (user != null) {
 			throw new RuntimeException(
-				String.format("Username '%s' already exists.", userName)
+				String.format("Username '%s' already exists.", newUserName)
 			);
 		}
 		
 		// Check if password is empty
-		if (password.isEmpty()) {
+		if (newPassword.isEmpty()) {
 			throw new RuntimeException("Please input a password");
 		}
 		
 		// Encrypt password 
 		String encryptedPassword;
 		try {
-			encryptedPassword = SHA256Hash(password);
+			encryptedPassword = SHA256Hash(newPassword);
 		} catch (NoSuchAlgorithmException e) {
 			throw new RuntimeException("Incorrect algorithm: " + e);
 		}
 		
 		String oldEncryptedPassword;
 		try {
-			oldEncryptedPassword = SHA256Hash(oldPassword);
+			oldEncryptedPassword = SHA256Hash(currentPassword);
 		} catch (NoSuchAlgorithmException e) {
 			throw new RuntimeException("Incorrect algorithm: " + e);
 		}
 		
-		
-		user = userRepo.findByUserNameAndPassword(oldUserName, oldEncryptedPassword);
+		User currentUser = userRepo.findByUserId(session.getUserId());
+		user = userRepo.findByUserNameAndPassword(currentUser.getUserName(), oldEncryptedPassword);
 		if (user == null) {
 			throw new RuntimeException("Invalid credentials.");
 		}
 		user.setNumReviews(0);
-		user.setUserName(userName);
+		user.setUserName(newUserName);
 		user.setPassword(encryptedPassword);
 		
 		// Update database
@@ -176,7 +183,10 @@ public class UserComponent {
 			throw new RuntimeException("Invalid session key.");
 		}
 		
-		return userRepo.findByUserId(session.getUserId());
+		User user = userRepo.findByUserId(session.getUserId());
+		user.setPassword("~redacted~");
+		user.setUserId(null);
+		return user;
 	}
 	
 	public List<User> getAllUsers() {
@@ -184,7 +194,8 @@ public class UserComponent {
 		
 		// Remove passwords before returning
 		for (User u : users) {
-			u.setPassword(null);
+			u.setPassword("~redacted~");
+			u.setUserId(null);
 		}
 		return users;
 	}

@@ -10,6 +10,7 @@ import app.entity.FoodStall;
 @Repository
 public interface FoodStallRepository extends JpaRepository<FoodStall, Long>{
 	public FoodStall findByStallName(String stallName);
+	public FoodStall findByStallId(Long stallId);
 	public FoodStall findByStallNameAndLocationId(String stallName, Long locationId);
 	public List<FoodStall> findByLocationId(Long locationId);
 }

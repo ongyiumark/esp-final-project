@@ -32,12 +32,13 @@ public class FoodStallController {
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
 	public FoodStall addNewFoodStall(
+			@FormParam("sessionKey") String sessionKey,
 			@FormParam("stallName") String stallName,
 			@FormParam("description") String description,
 			@FormParam("locationName") String locationName,
 			@FormParam("imageName") String imageName,
  			@FormParam("longitude") Double longitude,
 			@FormParam("latitude") Double latitude) {
-		return fsc.addNewFoodStall(stallName, description, imageName, locationName, longitude, latitude);
+		return fsc.addNewFoodStall(sessionKey, stallName, description, imageName, locationName, longitude, latitude);
 	}
 }

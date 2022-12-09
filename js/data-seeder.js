@@ -244,6 +244,10 @@ const stallSeeder = [
 
 const userSeeder = [
     {
+        "userName": "admin",
+        "password": "admin"
+    },
+    {
         "userName": "deloconi",
         "password": "password"
     },

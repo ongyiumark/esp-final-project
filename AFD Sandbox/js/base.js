@@ -205,6 +205,7 @@ async function saveFood() {
         }
     }
     if (!user) {
+        localStorage.removeItem("SESSION_KEY")
         signin()
         closeModal()
         throw new Error("Sign in required.")
@@ -244,6 +245,7 @@ async function saveFood() {
 
 
     let itemData = {
+        "sessionKey": SESSION_KEY,
         "stallName": stallName,
         "itemName": inputName.value,
         "price": priceVal

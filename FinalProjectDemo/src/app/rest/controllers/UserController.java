@@ -37,11 +37,11 @@ public class UserController {
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
 	public User update(
-			@FormParam("oldUserName") String oldUserName,
-			@FormParam("oldPassword") String oldPassword,
-			@FormParam("userName") String userName, 
-			@FormParam("password") String password) {
-		return uc.update(oldUserName, oldPassword, userName, password);
+			@FormParam("sessionKey") String sessionKey,
+			@FormParam("currentPassword") String currentPassword,
+			@FormParam("newUserName") String newUserName, 
+			@FormParam("newPassword") String newPassword) {
+		return uc.update(sessionKey, currentPassword, newUserName, newPassword);
 	}
 	
 	@POST

@@ -70,6 +70,7 @@
 
 #specific-stall-pic > img {
     height: 300px;
+    width: 300px;
     border: 8px solid white;
     border-radius: 50%;
 }
@@ -103,6 +104,7 @@
 
 #specific-stall-review-button {
     width: 50%;
+    text-align-last: right;
 }
 
 #specific-stall-review-button > a {

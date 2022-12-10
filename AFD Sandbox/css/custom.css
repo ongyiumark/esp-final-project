@@ -142,6 +142,7 @@ acc{
     border-color: #E7E7E7;
     border-radius: 0 10px 10px 0;
     cursor: pointer;
+    overflow-wrap: break-word;
 }
 .signin2{
     font-family: 'Roboto', sans-serif;
@@ -172,6 +173,7 @@ acc{
     border-color: #1B065E;
     border-radius: 0 10px 10px 0;
     cursor: pointer;
+    overflow-wrap: break-word;
 }
 .submit{
     font-family: 'Roboto', sans-serif;
